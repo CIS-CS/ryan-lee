@@ -50,15 +50,17 @@ public class TicketMachine
     /**
      * Receive an amount of money in cents from a customer. Check that the amount is sensible.
      */
-    public void insertMoney(int amount)
+    public boolean insertMoney(int amount)
     {
-        if(amount > 0)
+        if(amount > 0) 
         {
             balance = balance + amount;
+            return true;
         }
-        
-        else {
+        else 
+        {
             System.out.println("Use a positive amount rather than a negative number:" + amount);
+            return false;
         }
     }
 
@@ -67,26 +69,29 @@ public class TicketMachine
      * Update the total collected and
      * reduce the balance to zero.
      */
-    public void printTicket()
+    public boolean printTicket()
     {
-        if(balance >= price){
-        // Simulate the printing of a ticket.
-        System.out.println("##################");
-        System.out.println("# The BlueJ Line");
-        System.out.println("# Ticket");
-        System.out.println("# " + price + " cents.");
-        System.out.println("##################");
-        System.out.println();
-
-        // Update the total collected with the balance.
-        total = total + balance;
-        //Reduce the balance by the price.
-        balance = balance - price;
-    }
+        if(balance >= price) 
+        {
+            // Simulate the printing of a ticket.
+            System.out.println("##################");
+            System.out.println("# The BlueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("# " + price + " cents.");
+            System.out.println("##################");
+            System.out.println();
     
-    else{
-        System.out.println("You must insert at least:" + (price-balance) + " cents.");
-    }
+            // Update the total collected with the balance.
+            total = total + balance;
+            //Reduce the balance by the price.
+            balance = balance - price;
+            return true;
+        }
+        else 
+        {
+            System.out.println("You must insert at least:" + (price-balance) + " cents.");
+            return false;
+        }
     }
     /**
      * Return the money in the balance.
