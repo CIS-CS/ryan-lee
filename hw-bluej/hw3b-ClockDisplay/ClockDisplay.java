@@ -36,12 +36,12 @@ public class ClockDisplay
      * creates a new clock set at the time specified by the 
      * parameters.
      */
-    public ClockDisplay(int hour, int minute, int seconds)
+    public ClockDisplay(int hour, int minute, int second)
     {
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
         seconds = new NumberDisplay(60);
-        setTime(hour, minute, seconds);
+        setTime(hour, minute, second);
     }
 
     /**
@@ -61,11 +61,11 @@ public class ClockDisplay
      * Set the time of the display to the specified hour and
      * minute.
      */
-    public void setTime(int hour, int minute)
+    public void setTime(int hour, int minute, int second)
     {
         hours.setValue(hour);
         minutes.setValue(minute);
-        seconds.setValue(seconds);
+        seconds.setValue(second);
         updateDisplay();
     }
 

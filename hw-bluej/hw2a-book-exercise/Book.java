@@ -3,8 +3,8 @@
  * This might form part of a larger application such
  * as a library system, for instance.
  *
- * @author (Insert your name here.)
- * @version (Insert today's date here.)
+ * @author
+ * @version 
  */
 class Book
 {
@@ -14,6 +14,7 @@ class Book
     private int pages;
     private String refNumber;
     private int borrowed;
+    //private boolean courseText;
 
     /**
      * Set the author and title fields when this object
@@ -59,16 +60,33 @@ class Book
         System.out.println("Title: " + getTitle());
         System.out.println("Author:" + getAuthor());
         System.out.println("The number of pages is: " + getPages());
+        System.out.println("The number of times this book has been borrowed is: " + getBorrowed());
     }
     
-    public void setRefNumber(String ref)
-    { 
-        this.ref = refNumber;
+    public boolean setRefNumber(String refNumber)
+    {   
+        boolean isValid = false;
+        
+        if (refNumber.length() >= 3)
+        {
+            this.refNumber = refNumber;
+            isValid = true;
+        }
+        return isValid;
     }
     
-    public void setBorrowNumber(String borrow)
+    public void setBorrowNumber(int borrowed)
     {
-        this.borrow = borrowed;
+        this.borrowed = borrowed;
     }
     
+    public int getBorrowed()
+    {
+        return borrowed;
+    }
+    
+    //public int isCourseText()
+    //{
+        
+    //}
 }
