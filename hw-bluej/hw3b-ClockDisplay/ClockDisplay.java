@@ -17,6 +17,7 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private NumberDisplay seconds;
+    **private String meridien;
     private String displayString;    // simulates the actual display
     
     /**
@@ -25,7 +26,7 @@ public class ClockDisplay
      */
     public ClockDisplay()
     {
-        hours = new NumberDisplay(24);
+        hours = new NumberDisplay(12);
         minutes = new NumberDisplay(60);
         seconds = new NumberDisplay(60);
         updateDisplay();

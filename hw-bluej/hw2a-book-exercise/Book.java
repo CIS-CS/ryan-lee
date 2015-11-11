@@ -3,33 +3,33 @@
  * This might form part of a larger application such
  * as a library system, for instance.
  *
- * @author
- * @version 
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 class Book
 {
     // The fields.
     private String author;
     private String title;
-    private int pages;
     private String refNumber;
+    private int pages;
     private int borrowed;
-    //private boolean courseText;
+    private boolean courseText;
 
     /**
      * Set the author and title fields when this object
      * is constructed.
      */
-    public Book(String bookAuthor, String bookTitle, int bookPage, String referenceNumber, int borrowNumber)
+    public Book(String bookAuthor, String bookTitle, int bookPages, boolean bookCourseText)
     {
         author = bookAuthor;
         title = bookTitle;
-        pages = bookPage;
+        pages = bookPages;
         refNumber = "";
-        borrowed = borrowNumber;
+        borrowed = 0;
+        courseText = bookCourseText;
     }
 
-    // Add the methods here ...
     public String getAuthor()
     {
         return author;
@@ -44,25 +44,32 @@ class Book
     {
         return pages;
     }
+    
+    public String getRefNumber() 
+    {
+        return refNumber;
+    }
+    
+    public int getBorrowed()
+    {
+        return borrowed;
+    }
+    
+    public boolean isCourseText() 
+    {
+        return courseText;
+    }
 
     public void printAuthor()
     {
-        System.out.println("The author is " + getAuthor() + ".");
+        System.out.println(author);
     }
     
     public void printTitle()
     {
-        System.out.println("The title is " + getTitle() + ".");
+        System.out.println(title);
     }
-    
-    public void printDetails()
-    {
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author:" + getAuthor());
-        System.out.println("The number of pages is: " + getPages());
-        System.out.println("The number of times this book has been borrowed is: " + getBorrowed());
-    }
-    
+        
     public boolean setRefNumber(String refNumber)
     {   
         boolean isValid = false;
@@ -75,18 +82,18 @@ class Book
         return isValid;
     }
     
-    public void setBorrowNumber(int borrowed)
+    public boolean borrow() 
     {
-        this.borrowed = borrowed;
+        borrowed++;
+        return true;
     }
     
-    public int getBorrowed()
+    public boolean printDetails()
     {
-        return borrowed;
-    }
-    
-    //public int isCourseText()
-    //{
+        if (refNumber.length() > 0)
+             System.out.println("Title: " + title + ", Author: " + author + ", Number of pages: " + pages 
+             + ", Reference number: " + refNumber + ", Number of times borrowed: " + borrowed);
         
-    //}
+        return true;
+    }
 }
