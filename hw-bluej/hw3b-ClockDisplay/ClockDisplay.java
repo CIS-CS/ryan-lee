@@ -17,7 +17,7 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private NumberDisplay seconds;
-    **private String meridien;
+    //**private String meridien;
     private String displayString;    // simulates the actual display
     
     /**
