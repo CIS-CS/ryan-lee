@@ -58,24 +58,26 @@ public class ClockDisplay
         {  // it just rolled over!
             hours.increment();
         }
-        if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "pm") 
-        {
-            meridiem = "am";
-        }
-        else if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "am") 
-        {
-            meridiem = "pm";
-        }
+
         seconds.increment();
         if(seconds.getValue() == 0) 
         {  // it just rolled over!
             minutes.increment();
-        }    
+        
          if(minutes.getValue() == 0 && seconds.getValue() == 0) 
          {  // it just rolled over!
            hours.increment();
-           updateDisplay();
-        }
+           if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "am") 
+         {
+            meridiem = "pm";
+         }
+           else if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "pm") 
+         {
+            meridiem = "am";
+         }
+       }
+      } 
+      updateDisplay();
     }
 
     /**
@@ -105,6 +107,6 @@ public class ClockDisplay
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue() + seconds.getDisplayValue() + " " +meridiem;
+                        minutes.getDisplayValue() + ":" + seconds.getDisplayValue() + " " +meridiem;
     }
 }
