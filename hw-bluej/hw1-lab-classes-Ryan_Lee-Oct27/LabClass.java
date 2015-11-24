@@ -12,6 +12,7 @@ public class LabClass
     private String instructor;
     private String room;
     private String timeAndDay;
+    private String advisoryGroup;
     private ArrayList<Student> students;
     private int capacity;
     
@@ -72,6 +73,14 @@ public class LabClass
     public void setInstructor(String instructorName)
     {
         instructor = instructorName;
+    }
+    
+    public void setAdvisory(String advisory) {
+        advisoryGroup = advisory;
+    }
+    
+    public String getAdvisory() {
+        return advisoryGroup;
     }
     
     /**
