@@ -25,8 +25,8 @@ public class ClockDisplay
      */
     public ClockDisplay()
     {
-        hours = new NumberDisplay(13);
-        minutes = new NumberDisplay(60);
+        hours = new NumberDisplay(13,1);
+        minutes = new NumberDisplay(60,0);
         meridiem = "am";
         setTime(12, 0, "a.m.");
     }
@@ -38,8 +38,8 @@ public class ClockDisplay
      */
     public ClockDisplay(int hour, int minute, String ampm)
     {
-        hours = new NumberDisplay(13);
-        minutes = new NumberDisplay(60);
+        hours = new NumberDisplay(13,1);
+        minutes = new NumberDisplay(60,0);
         meridiem = ampm;
         setTime(hour, minute, ampm);
     }
