@@ -1,4 +1,3 @@
-
 /**
  * The ClockDisplay class implements a digital clock display for a
  * European-style 24 hour clock. The clock shows hours and minutes. The 
@@ -29,7 +28,7 @@ public class ClockDisplay
         hours = new NumberDisplay(13);
         minutes = new NumberDisplay(60);
         seconds = new NumberDisplay(60);
-        meridiem = "am";
+        meridiem = "a.m.";
         setTime(12, 0, 0, "a.m.");
     }
 
@@ -53,33 +52,31 @@ public class ClockDisplay
      */
     public void timeTick()
     {
-        minutes.increment();
-        if(minutes.getValue() == 0) 
-        {  // it just rolled over!
-            hours.increment();
-        }
-
-        seconds.increment();
-        if(seconds.getValue() == 0) 
-        {  // it just rolled over!
+      seconds.increment();
+      if(seconds.getValue() == 0) {  
             minutes.increment();
-        
-         if(minutes.getValue() == 0 && seconds.getValue() == 0) 
-         {  // it just rolled over!
-           hours.increment();
-           if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "am") 
+      if(minutes.getValue() == 0 && seconds.getValue() == 0) 
+          hours.increment();
+      {      
+         if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "a.m.") 
          {
-            meridiem = "pm";
+             meridiem = "p.m.";
          }
-           else if(hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "pm") 
+         
+         else if (hours.getValue() == 12 && minutes.getValue() == 0 && seconds.getValue() == 0 && meridiem == "p.m.") 
          {
-            meridiem = "am";
+             meridiem = "a.m.";
          }
-       }
-      } 
-      updateDisplay();
+         
+         else
+         {
+             hours.increment();
+         }
+         updateDisplay();
+      }
+      }
     }
-
+ 
     /**
      * Set the time of the display to the specified hour and
      * minute.
@@ -107,6 +104,6 @@ public class ClockDisplay
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue() + ":" + seconds.getDisplayValue() + " " +meridiem;
+                        minutes.getDisplayValue() + ":" + seconds.getDisplayValue() + " " + meridiem;
     }
 }
