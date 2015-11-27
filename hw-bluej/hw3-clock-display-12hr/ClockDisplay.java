@@ -1,8 +1,7 @@
-
 /**
  * The ClockDisplay class implements a digital clock display for a
  * European-style 24 hour clock. The clock shows hours and minutes. The 
- * range of the clock is 00:00 (midnight) to 23:59 (one minute before 
+ * range of the clock is 00:00 (midnight) to 11:59 (one minute before 
  * midnight).
  * 
  * The clock display receives "ticks" (via the timeTick method) every minute
@@ -25,9 +24,9 @@ public class ClockDisplay
      */
     public ClockDisplay()
     {
-        hours = new NumberDisplay(13,1);
-        minutes = new NumberDisplay(60,0);
-        meridiem = "am";
+        hours = new NumberDisplay(13);
+        minutes = new NumberDisplay(60);
+        meridiem = "a.m.";
         setTime(12, 0, "a.m.");
     }
 
@@ -38,8 +37,8 @@ public class ClockDisplay
      */
     public ClockDisplay(int hour, int minute, String ampm)
     {
-        hours = new NumberDisplay(13,1);
-        minutes = new NumberDisplay(60,0);
+        hours = new NumberDisplay(13);
+        minutes = new NumberDisplay(60);
         meridiem = ampm;
         setTime(hour, minute, ampm);
     }
@@ -54,11 +53,11 @@ public class ClockDisplay
         if(minutes.getValue() == 0) {  // it just rolled over!
             hours.increment();
         
-        if(hours.getValue() == 12 && minutes.getValue() == 0 && meridiem == "am") {
-                meridiem = "pm";
+        if(hours.getValue() == 12 && minutes.getValue() == 0 && meridiem == "p.m.") {
+                meridiem = "a.m.";
             }
-            else if(hours.getValue() == 12 && minutes.getValue() == 0 && meridiem == "pm") {
-                meridiem = "am";
+        else if(hours.getValue() == 12 && minutes.getValue() == 0 && meridiem == "a.m.") {
+                meridiem = "p.m.";
             }
         }
         updateDisplay();

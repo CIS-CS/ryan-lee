@@ -14,17 +14,15 @@ public class NumberDisplay
 {
     private int limit;
     private int value;
-    private int minimum;
 
     /**
      * Constructor for objects of class NumberDisplay.
      * Set the limit at which the display rolls over.
      */
-    public NumberDisplay(int rollOverLimit, int minimumValue)
+    public NumberDisplay(int rollOverLimit)
     {
         limit = rollOverLimit;
         value = 0;
-        minimum = minimumValue;
     }
 
     /**
@@ -68,8 +66,5 @@ public class NumberDisplay
     public void increment()
     {
         value = (value + 1) % limit;
-        if(value < minimum) {
-           value = value + 1;
-        }
     }
 }
