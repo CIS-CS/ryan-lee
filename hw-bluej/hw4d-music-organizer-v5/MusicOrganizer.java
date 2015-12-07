@@ -60,13 +60,7 @@ public class MusicOrganizer
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
         }
     }
-    
-    /*public void playRandomTrack()
-    {
         
-        
-    } */
-    
     /**
      * Return the number of tracks in the collection.
      * @return The number of tracks in the collection.
