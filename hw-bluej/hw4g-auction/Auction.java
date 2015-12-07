@@ -63,6 +63,7 @@ public class Auction
             if(successful) {
                 System.out.println("The bid for lot number " +
                                    lotNumber + " was successful.");
+                return true;
             }
             else {
                 // Report which bid is higher.
@@ -70,8 +71,8 @@ public class Auction
                 System.out.println("Lot number: " + lotNumber +
                                    " already has a bid of: " +
                                    highestBid.getValue());
+               return false;
             }
-            return successful;
         }
         return false;
     }
@@ -91,7 +92,6 @@ public class Auction
              for(Lot l : lots) {
                 if(l.getNumber() == lotNumber) {
                     selectedLot = l;
-                    break;
                 }
             }
             return selectedLot;
@@ -136,14 +136,16 @@ public class Auction
             if(highest != null) {
                 Person bidder = highest.getBidder();
                 
-                if(bidder == null) System.out.println("No Bidder");
-                else System.out.println("Highest bidder: " + bidder);
+                if(bidder == null){ 
+                    System.out.println("No Bidder");
+                }
+                else {
+                    System.out.println("Highest bidder: " + bidder);
+                }
                 System.out.println("Winning bid: " + highest.getValue() + "\n");
-                
                 count++;
             }
         }
-        
         return count;
     }
 }
