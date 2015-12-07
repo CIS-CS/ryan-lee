@@ -121,9 +121,12 @@ public class Auction
         ArrayList<Lot> unsold = new ArrayList<Lot>();
         
         for(Lot l : lots) {
-            if(l.getHighestBid() == null) unsold.add(l);
+            if(l.getHighestBid() == null)
+            {
+                unsold.add(l);
+                System.out.println(l.toString());
+            }
         }
-            
         return unsold;
     }
     
