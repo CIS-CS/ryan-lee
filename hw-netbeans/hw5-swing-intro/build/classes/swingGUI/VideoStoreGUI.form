@@ -42,8 +42,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="detailsPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="addButton" alignment="1" max="32767" attributes="0"/>
                   <Component id="cancelButton" alignment="0" max="32767" attributes="0"/>
@@ -91,10 +92,6 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="isOnLoan" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -123,7 +120,11 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="isOnLoan" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                           <Component id="videoNumberLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -134,24 +135,24 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="titleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="titleField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lengthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lengthField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lengthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="isOnLoan" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="homeButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="leftButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="rightButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="endButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="leftButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="videoNumberLabel" min="-2" max="-2" attributes="0"/>
@@ -204,6 +205,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&gt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rightButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="endButton">
           <Properties>
@@ -215,7 +219,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="videoNumberLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="1 of 10"/>
+            <Property name="text" type="java.lang.String" value="1 of 1"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -224,11 +228,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="deleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="applyButton">
       <Properties>
