@@ -246,4 +246,3 @@ public class LogAnalyzerTest2
         assertEquals(22, logAnalyzer.busiestTwoHours());        
     }    
 }
-

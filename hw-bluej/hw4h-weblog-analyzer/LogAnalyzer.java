@@ -15,13 +15,18 @@ public class LogAnalyzer
     /**
      * Create an object to analyze hourly web accesses.
      */
-    public LogAnalyzer(String logFile)
+    public LogAnalyzer()
     { 
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
         // Create the reader to obtain the data.
         reader = new LogfileReader();
+    }
+    
+       public LogAnalyzer(String filename){
+        hourCounts = new int[24];
+        reader = new LogfileReader(filename);
     }
 
     /**
@@ -73,8 +78,8 @@ public class LogAnalyzer
     
     public int busiestHour()
     {
-        int hour = 0;
         int max = 0;
+        int hour = 0;
         
         for(int i = 0; i < hourCounts.length; i++) {
             if(hourCounts[i] > max) {
@@ -82,14 +87,13 @@ public class LogAnalyzer
                 hour = i;
             }
         }
-        
         return hour;
     }
     
     public int quietestHour()
     {   
-        int hour = 0;
         int min = 2147483647;
+        int hour = 0;
         
         for(int i = 0; i < hourCounts.length; i++) {
             if(hourCounts[i] < min) {
@@ -97,25 +101,20 @@ public class LogAnalyzer
                 hour = i;
             }
         }
-        
         return hour;
     }
     
-    public int busiestTwoHours() {
-        int twoHours = 0;
+    public int busiestTwoHours() 
+    {   
         int max = 0;
         int hour = 0;
         
         for(int i = 0; i < hourCounts.length - 1; i++) {
-            
-            twoHours = hourCounts[i] + hourCounts[i + 1];
-            
-            if(twoHours > max) {
-                max = twoHours;
+            if (hourCounts[i] + hourCounts[i+1] > max){
+                max = hourCounts[i]+ hourCounts[i+1];
                 hour = i;
             }
         }
-        
-        return hour;
-    }
+        return hour; 
+    } 
 }
