@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=
+comment0.target=RandomTester()
+comment1.params=
+comment1.target=void\ printOneRandom()
+comment2.params=six
+comment2.target=void\ printMultiRandom(int)
+comment3.params=
+comment3.target=int\ nextInt()
+comment4.params=
+comment4.target=int\ throwDice()
+comment5.params=
+comment5.target=void\ getResponse()
+comment6.params=max
+comment6.target=int\ numberGenerator(int)
+comment7.params=min\ max
+comment7.target=int\ numberGeneratorTwo(int,\ int)
+numComments=8
