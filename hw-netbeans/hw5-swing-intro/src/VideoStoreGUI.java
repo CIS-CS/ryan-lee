@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 
 /*
@@ -5,7 +6,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swingGUI;
 
 /**
  *
@@ -13,15 +13,22 @@ package swingGUI;
  */
 public class VideoStoreGUI extends javax.swing.JFrame {
     
-private int currentNumber = 1;
-private int max = 1;
-
-
+    //private DoubleList tapes;
+    private int currentNumber;
+    private int max;
+    private ArrayList<VideoTape> tapes;
+    
     /**
      * Creates new form VideoStoreGUI
      */
     public VideoStoreGUI() {
+     
         initComponents();
+        
+       // tapes = new DoubleList();
+        currentNumber = -1; //-1 indicates no tapes in system
+        tapes = new ArrayList<VideoTape>();
+        max = tapes.size();
     }
 
     /**
@@ -46,7 +53,6 @@ private int max = 1;
         videoNumberLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        applyButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -131,7 +137,7 @@ private int max = 1;
                     .addGroup(detailsPanelLayout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(videoNumberLabel)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         detailsPanelLayout.setVerticalGroup(
             detailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,9 +177,12 @@ private int max = 1;
             }
         });
 
-        applyButton.setText("Apply");
-
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         fileMenu.setText("File");
         MenuBar.add(fileMenu);
@@ -193,9 +202,8 @@ private int max = 1;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(applyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -203,17 +211,15 @@ private int max = 1;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(detailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(applyButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(detailsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(53, 53, 53)
+                        .addComponent(cancelButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -225,61 +231,130 @@ private int max = 1;
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void leftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftButtonActionPerformed
-
         if (currentNumber > 1)
         {
             currentNumber--;
-            videoNumberLabel.setText(currentNumber + " of " + max);
+            videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
         }  
+        
+        if (currentNumber -1 > 0){
+            currentNumber -= 1;
+            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+            titleField.setText(tapes.get(currentNumber-1).getTitle());
+            lengthField.setText(Integer.toString(
+                    videos.get(currentVideo-1).getLength()
+                    ));
+            isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+        }
+        
     }//GEN-LAST:event_leftButtonActionPerformed
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
      
-        currentNumber = 1;
-        videoNumberLabel.setText(currentNumber + " of " + max);
+        currentNumber = 0;
+        VideoTape tape = tapes.get(currentNumber);
+        //fieldName.setText
+        
+        //tape.setText(tape.get(String title,int length,boolean lent));
+        
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        
+        
+         videoNumberLabel.setText(1 + " of " + videos.size());
+        currentVideo = 1;
+        titleField.setText(videos.get(currentVideo-1).getTitle());
+        lengthField.setText(Integer.toString(
+                    videos.get(currentVideo-1).getLength()
+                    ));
+        isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
       
-        currentNumber = max;
-        videoNumberLabel.setText(currentNumber + " of " + max);
+        currentNumber = tapes.size();
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        
+        
+        
+         videoNumberLabel.setText(tapes.size() + " of " + tapes.size());
+        currentVideo = videos.size();
+        titleField.setText(videos.get(currentVideo-1).getTitle());
+        lengthField.setText(Integer.toString(
+                    videos.get(currentVideo-1).getLength()
+                    ));
+        isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
     }//GEN-LAST:event_endButtonActionPerformed
 
     private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
-        if (currentNumber < max){
+        if (currentNumber < tapes.size()){
             currentNumber++;
         
-        videoNumberLabel.setText(currentNumber + " of " + max);
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        
+        
     }
+        
+         if (currentVideo +1 <= videos.size()){
+            currentVideo += 1;
+            videoNumberLabel.setText(currentVideo + " of " + videos.size());
+            titleField.setText(videos.get(currentVideo-1).getTitle());
+            lengthField.setText(Integer.toString(
+                    videos.get(currentVideo-1).getLength()
+                    ));
+            isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+        }
     }//GEN-LAST:event_rightButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        //String title = titleField.getText();
-        //int length = Integer.parseInt(lengthField.getText());
         
-        //Videotape tape = new VideoTape(length, field, int)
+        String title = titleField.getText();
+        int length   = Integer.parseInt(lengthField.getText());
+        boolean lent = isOnLoan.isSelected();
         
-        currentNumber++;
-        max++;
-        videoNumberLabel.setText(currentNumber + " of " + max);
+        VideoTape tape = new VideoTape(title,length,lent);
+        max = max + 1;
+        currentNumber = max;
+        
+        tapes.add((currentNumber), tape);
+        
+        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
- 
+       
+        max = max - 1;
+        if (currentNumber > max){
+            currentNumber = currentNumber - 1; 
+        }
         
-        if(max > 1 && currentNumber > 1) {
-	    max--;
-	    currentNumber--;
-	    videoNumberLabel.setText(currentNumber + " of " + max);
-	}
-	else if(currentNumber == 1 && max > 1) {
-	    max--;
-	    videoNumberLabel.setText(currentNumber + " of " + max);
+        //videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+            
+            
+            
+      //  if (currentNumber -1 >= 0){
+          //  tapes.remove(currentNumber-1);
+          //  currentNumber -= 1;
+          //  videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+            titleField.setText(tapes.get(currentNumber-1).getTitle());
+            lengthField.setText(Integer.toString(tapes.get(currentNumber-1).getLength()));
+            isOnLoan.setSelected(tapes.get(currentNumber-1).isLent());
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        currentVideo -= 1;
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        titleField.setText(videos.get(currentNumber-1).getTitle());
+        lengthField.setText(Integer.toString(
+           tapes.get(currentNumber-1).getLength()
+        ));
+        isOnLoan.setSelected(tapes.get(currentNumber-1).isLent());
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,7 +393,6 @@ private int max = 1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JButton addButton;
-    private javax.swing.JButton applyButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JPanel detailsPanel;
