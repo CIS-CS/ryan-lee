@@ -15,7 +15,6 @@ public class VideoStoreGUI extends javax.swing.JFrame {
     
     //private DoubleList tapes;
     private int currentNumber;
-    private int max;
     private ArrayList<VideoTape> tapes;
     
     /**
@@ -28,7 +27,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
        // tapes = new DoubleList();
         currentNumber = -1; //-1 indicates no tapes in system
         tapes = new ArrayList<VideoTape>();
-        max = tapes.size();
+        
     }
 
     /**
@@ -53,6 +52,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
         videoNumberLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        applyButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -104,7 +104,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
             }
         });
 
-        videoNumberLabel.setText("1 of 1");
+        videoNumberLabel.setText("0 of 0");
 
         javax.swing.GroupLayout detailsPanelLayout = new javax.swing.GroupLayout(detailsPanel);
         detailsPanel.setLayout(detailsPanelLayout);
@@ -177,6 +177,14 @@ public class VideoStoreGUI extends javax.swing.JFrame {
             }
         });
 
+        applyButton.setText("Apply");
+        applyButton.setToolTipText("");
+        applyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyButtonActionPerformed(evt);
+            }
+        });
+
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,8 +210,9 @@ public class VideoStoreGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                    .addComponent(applyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -218,7 +227,9 @@ public class VideoStoreGUI extends javax.swing.JFrame {
                         .addComponent(addButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(deleteButton)
-                        .addGap(53, 53, 53)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(applyButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cancelButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -231,131 +242,96 @@ public class VideoStoreGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void leftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftButtonActionPerformed
-        if (currentNumber > 1)
-        {
-            currentNumber--;
-            videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
-        }  
-        
-        if (currentNumber -1 > 0){
+     //works
+        if (currentNumber > 0){
             currentNumber -= 1;
-            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-            titleField.setText(tapes.get(currentNumber-1).getTitle());
-            lengthField.setText(Integer.toString(
-                    videos.get(currentVideo-1).getLength()
-                    ));
-            isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+            videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+            titleField.setText(tapes.get(currentNumber).getTitle());
+            lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
+            isOnLoan.setSelected(tapes.get(currentNumber).isLent());
         }
-        
     }//GEN-LAST:event_leftButtonActionPerformed
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-     
+     //works
         currentNumber = 0;
-        VideoTape tape = tapes.get(currentNumber);
-        //fieldName.setText
+        VideoTape tape = tapes.get(currentNumber);     
+        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+        titleField.setText(tapes.get(currentNumber).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
+        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
         
-        //tape.setText(tape.get(String title,int length,boolean lent));
-        
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        
-        
-         videoNumberLabel.setText(1 + " of " + videos.size());
-        currentVideo = 1;
-        titleField.setText(videos.get(currentVideo-1).getTitle());
-        lengthField.setText(Integer.toString(
-                    videos.get(currentVideo-1).getLength()
-                    ));
-        isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+     
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
-      
-        currentNumber = tapes.size();
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        
-        
-        
-         videoNumberLabel.setText(tapes.size() + " of " + tapes.size());
-        currentVideo = videos.size();
-        titleField.setText(videos.get(currentVideo-1).getTitle());
-        lengthField.setText(Integer.toString(
-                    videos.get(currentVideo-1).getLength()
-                    ));
-        isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+      //works
+        currentNumber = tapes.size() - 1;
+        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+        titleField.setText(tapes.get(currentNumber).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
+        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+
     }//GEN-LAST:event_endButtonActionPerformed
 
     private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
-        if (currentNumber < tapes.size()){
-            currentNumber++;
-        
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        
-        
-    }
-        
-         if (currentVideo +1 <= videos.size()){
-            currentVideo += 1;
-            videoNumberLabel.setText(currentVideo + " of " + videos.size());
-            titleField.setText(videos.get(currentVideo-1).getTitle());
-            lengthField.setText(Integer.toString(
-                    videos.get(currentVideo-1).getLength()
-                    ));
-            isOnLoan.setSelected(videos.get(currentVideo-1).isLent());
+        //works
+        if (currentNumber < tapes.size() - 1){
+            currentNumber += 1;
+        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+        titleField.setText(tapes.get(currentNumber).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
+        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+       
         }
     }//GEN-LAST:event_rightButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
+     //works   
         String title = titleField.getText();
         int length   = Integer.parseInt(lengthField.getText());
         boolean lent = isOnLoan.isSelected();
-        
+        currentNumber++;
         VideoTape tape = new VideoTape(title,length,lent);
-        max = max + 1;
-        currentNumber = max;
-        
         tapes.add((currentNumber), tape);
-        
         videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-       
-        max = max - 1;
-        if (currentNumber > max){
-            currentNumber = currentNumber - 1; 
+     //works 
+        if (currentNumber < tapes.size()){
+            tapes.remove(currentNumber);
         }
+
+        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
+        titleField.setText(tapes.get(currentNumber).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
+        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
         
-        //videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-            
-            
-            
-      //  if (currentNumber -1 >= 0){
-          //  tapes.remove(currentNumber-1);
-          //  currentNumber -= 1;
-          //  videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-            videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-            titleField.setText(tapes.get(currentNumber-1).getTitle());
-            lengthField.setText(Integer.toString(tapes.get(currentNumber-1).getLength()));
-            isOnLoan.setSelected(tapes.get(currentNumber-1).isLent());
-        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+        
+        String title = titleField.getText();
+        int length   = Integer.parseInt(lengthField.getText());
+        boolean lent = isOnLoan.isSelected();
+        VideoTape tape = tapes.get(currentNumber);
+		  tape.setTitle(title);
+		  tape.setLength(length);
+		  tape.setLent(lent);
+
+    }//GEN-LAST:event_applyButtonActionPerformed
+
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        currentVideo -= 1;
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        titleField.setText(videos.get(currentNumber-1).getTitle());
-        lengthField.setText(Integer.toString(
-           tapes.get(currentNumber-1).getLength()
-        ));
+       
+        titleField.setText(tapes.get(currentNumber-1).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber-1).getLength()));
         isOnLoan.setSelected(tapes.get(currentNumber-1).isLent());
+        videoNumberLabel.setText((currentNumber) + " of " + tapes.size());
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    /**
+    /**e
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -393,6 +369,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton applyButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JPanel detailsPanel;
