@@ -68,6 +68,21 @@ public class DoubleList {
         }
     }
     
+     /**
+     *  Inserts a tape before a selected tape item of the list.
+     *  @param tape The tape to insert.
+     */
+    
+    public void insertBefore(DoubleNode node)
+    {
+        node.setNext(current);
+        node.setPrev(current.getPrev());
+        current.getPrev().setNext(node);
+        current.setPrev(node);
+        current = node;
+    }
+   
+    
     public VideoTape getNextTape()
     {
         if (current.getNext() == null){

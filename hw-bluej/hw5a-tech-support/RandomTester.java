@@ -14,19 +14,17 @@ public class RandomTester
 
     public RandomTester()
     {
-        
+        randomGen = new Random();
     } 
-    //5.14
+    //5.14a
     public void printOneRandom()
     {
-        randomGen = new Random();
         int index = randomGen.nextInt();
         System.out.println(index);
     }
-    //5.14
+    //5.14b
     public void printMultiRandom (int six)
     {
-        randomGen = new Random();
         for (int numberOfValues = 1; numberOfValues <= 6; numberOfValues++){
             int index = randomGen.nextInt();
             System.out.println(index);
@@ -35,38 +33,33 @@ public class RandomTester
     //5.15
     public int nextInt() 
     {
-        randomGen = new Random();
         int value = 0 + randomGen.nextInt(100);
         return value;
     }
     //5.16
     public int throwDice()
     {
-        randomGen = new Random();
         int value = 1 + randomGen.nextInt(7);
         return value;
     } 
-    //5.17
+    //5.17 and 5.18
     public void getResponse()
     {
         ArrayList<String> responses = new ArrayList<String>();
         responses.add("yes");
         responses.add("no");
         responses.add("maybe");
-        randomGen = new Random();
         System.out.println(responses.get(randomGen.nextInt(responses.size())));
     }
     //5.19
     public int numberGenerator(int max)
     {
-        randomGen = new Random();
         int randomNum = randomGen.nextInt((max-1) + 1) + 1;
         return randomNum;
     }
     //5.20
     public int numberGeneratorTwo(int min, int max)
     {
-        randomGen = new Random();
         int randomNumTwo = randomGen.nextInt((max-min) + 1) + min;
         return randomNumTwo;
     }
