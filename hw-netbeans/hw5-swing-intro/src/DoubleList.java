@@ -90,29 +90,7 @@ public class DoubleList {
         current.setNext(node);
         current = node; 
     }
-   
-    
-    public void deleteTail(DoubleNode node)
-    {
-
-         // Check if the list is empty
-        if (head == null)
-        {
-            // Add the node to the empty list.
-            head = node;
-            tail = node;
-            current = node;
-        }
-        else
-        {
-            // The list is not empty. Add at tail.
-            tail.setNext(node);
-            node.setPrev(tail);
-            tail = node;
-            current = tail;
-        }
-    }
-    
+       
     public VideoTape getNextTape()
     {
         if (current.getNext() == null){
@@ -136,6 +114,84 @@ public class DoubleList {
             return current.getTape();
         }
     }
+    
+    public VideoTape getHead() 
+    {
+	
+	return head.getTape();
+    }
+    
+    public VideoTape getTail() 
+    {
+	
+	return tail.getTape();
+    }
+    
+    public VideoTape getCurrent()
+    {
+        return current.getTape();
+    }   
+    
+    
+          
+    public void deleteHead()
+    {
+        head = head.getNext();
+	current = head;
+	head.getPrev().setNext(null);
+	head.setPrev(null);
+    }
+            
+            
+    public void deleteTail(DoubleNode node)
+    {
+
+         // Check if the list is empty
+        if (head == null)
+        {
+            // Add the node to the empty list.
+            head = node;
+            tail = node;
+            current = node;
+        }
+        else
+        {
+            // The list is not empty. Add at tail.
+            tail.setNext(node);
+            node.setPrev(tail);
+            tail = node;
+            current = tail;
+        }
+    }
+    
+    public void deleteMiddle() 
+    {
+	
+	DoubleNode temp = current.getPrev();
+	
+	current.getNext().setPrev(current.getPrev());
+	current.getPrev().setNext(current.getNext());
+	current.setNext(null);
+	current.setPrev(null);
+	current = temp;
+    }
+    
+    public void removeTail() 
+    {
+	
+	tail = tail.getPrev();
+	current = tail;
+	tail.getNext().setPrev(null);
+	tail.setNext(null);
+    }
+    
+    public void removeLast() 
+    {
+	
+	head = null;
+	tail = null;
+    }
+    
     
     public void editTape(String title, int length, boolean lent)
     {
