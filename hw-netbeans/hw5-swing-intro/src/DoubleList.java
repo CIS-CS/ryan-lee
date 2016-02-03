@@ -81,7 +81,37 @@ public class DoubleList {
         current.setPrev(node);
         current = node;
     }
+    
+    public void insertAfter(DoubleNode node)
+    {
+        node.setPrev(current);
+        node.setNext(current.getNext());
+        current.getNext().setPrev(node);
+        current.setNext(node);
+        current = node; 
+    }
    
+    
+    public void deleteTail(DoubleNode node)
+    {
+
+         // Check if the list is empty
+        if (head == null)
+        {
+            // Add the node to the empty list.
+            head = node;
+            tail = node;
+            current = node;
+        }
+        else
+        {
+            // The list is not empty. Add at tail.
+            tail.setNext(node);
+            node.setPrev(tail);
+            tail = node;
+            current = tail;
+        }
+    }
     
     public VideoTape getNextTape()
     {

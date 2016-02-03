@@ -11,24 +11,22 @@ import java.util.ArrayList;
  *
  * @author chrl98
  */
-public class VideoStoreGUI extends javax.swing.JFrame {
+public class VideoStoreGUIDoubleList extends javax.swing.JFrame {
     
-    //private DoubleList tapes;
+    private DoubleList tapes;
     private int currentNumber;
-    private ArrayList<VideoTape> tapes;
+    private int max;
+    private DoubleList VideoTape = new DoubleList();
     
     
     /**
      * Creates new form VideoStoreGUI
      */
-    public VideoStoreGUI() {
+    public VideoStoreGUIDoubleList() {
      
         initComponents();
-        
-       // tapes = new DoubleList();
         currentNumber = -1; //-1 indicates no tapes in system
-        tapes = new ArrayList<VideoTape>();
-        
+        max = 0;
     }
 
     /**
@@ -290,13 +288,40 @@ public class VideoStoreGUI extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
      //works   
+     
+     if (currentNumber < max)
+     {
+        currentNumber++;
+        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
+     
+     }
+     
         String title = titleField.getText();
         int length   = Integer.parseInt(lengthField.getText());
         boolean lent = isOnLoan.isSelected();
-        currentNumber++;
+        //currentNumber++;
         VideoTape tape = new VideoTape(title,length,lent);
+        DoubleNode node = new DoubleNode(VideoTape tape);
+        
+      if (max == 0)
+      {
+          VideoTape.insertHead(node);
+      }
+      
+      else if (current == max)
+      {
+          VideoTape.insertTail(node);
+      }
+      
+      else
+      {
+          VideoTape.insertBefore(node);
+      }
+        
+       
+    
         tapes.add((currentNumber), tape);
-        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
+        //videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
