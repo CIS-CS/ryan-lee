@@ -15,6 +15,7 @@ public class DoubleList {
     private DoubleNode head = null;
     private DoubleNode tail = null;
     private DoubleNode current = null;  // points to last inserted node
+    private int size;
 
     /**
      *  Inserts a tape at the head of the list.
@@ -40,6 +41,7 @@ public class DoubleList {
             head = node;
             current = head;
         }
+        size++;
     }
 
     /**
@@ -66,38 +68,40 @@ public class DoubleList {
             tail = node;
             current = tail;
         }
+        size++;
     }
-    
+     
      /**
      *  Inserts a tape before a selected tape item of the list.
      *  @param tape The tape to insert.
      */
     
-    public void insertBefore(DoubleNode node)
+    public void insertBefore(VideoTape tape) 
     {
-        node.setNext(current);
-        node.setPrev(current.getPrev());
-        current.getPrev().setNext(node);
-        current.setPrev(node);
-        current = node;
+        //to be implemented later
     }
     
-    public void insertAfter(DoubleNode node)
+    public void insertAfter(VideoTape tape)
     {
+        DoubleNode node = new DoubleNode(tape);
+        
         node.setPrev(current);
         node.setNext(current.getNext());
-        current.getNext().setPrev(node);
         current.setNext(node);
+        current.getNext().setPrev(node);
         current = node; 
+        
+        size++;
     }
-       
+        
     public VideoTape getNextTape()
     {
-        if (current.getNext() == null){
+        if (current.getNext() == null) 
+        {
             return null;
-        }
-        
-        else {
+        }       
+        else 
+        {
             current = current.getNext();
             return current.getTape();
         }
@@ -105,63 +109,97 @@ public class DoubleList {
     
     public VideoTape getPreviousTape()
     {
-        if (current.getPrev() == null){
+        if (current.getPrev() == null)
+        {
             return null;
         }
-        
-        else {
+        else 
+        {
             current = current.getPrev();
             return current.getTape();
         }
     }
     
-    public VideoTape getHead() 
+    //Possible delete scenarios
+    
+   /* delete
+            if size == 0
+              (do nothing)
+            else if size == 1
+            set HTC = null
+            else 
+            remove current node
+            ( else if first node ---
+                    else if last node ---
+            else---) */
+    
+    /**
+     * This method will delete the current node.
+     */
+    public void delete() 
     {
-	
-	return head.getTape();
+        if (size == 1)
+        {
+            // list has one node, delete it
+            head = null;
+            tail = null;
+            current = null;
+            size = 0;
+        }
+        else if (current == head)
+        {
+            // current is pointing at first node of the list
+            head = head.getNext();
+            current = current.getNext();
+            current.getPrev().setNext(null);
+            current.setPrev(null);
+            size--;
+        }
+        else if (current == tail)
+        {
+            // current is pointing at last node of the list
+            tail = tail.getPrev();
+            current = current.getPrev();
+            current.getNext().setPrev(null);
+            current.setNext(null);
+            size--;
+        }
+        else
+        {   
+            // current is pointing to an interior node
+            current.getPrev().setNext(current.getNext());
+            current.getNext().setPrev(current.getPrev());
+            DoubleNode temp = current.getNext();
+            current.setPrev(null);
+            current.setNext(null);
+            current = temp;
+            size--;
+        }
     }
     
-    public VideoTape getTail() 
-    {
-	
-	return tail.getTape();
-    }
-    
-    public VideoTape getCurrent()
-    {
-        return current.getTape();
-    }   
-    
-    
-          
-    public void deleteHead()
+/* 
+    public void deleteAtHead()
     {
         head = head.getNext();
 	current = head;
 	head.getPrev().setNext(null);
 	head.setPrev(null);
+        
+        size--;
     }
-            
             
     public void deleteTail(DoubleNode node)
     {
-
          // Check if the list is empty
-        if (head == null)
-        {
-            // Add the node to the empty list.
-            head = node;
-            tail = node;
-            current = node;
-        }
-        else
+        if (head != null)
         {
             // The list is not empty. Add at tail.
             tail.setNext(node);
             node.setPrev(tail);
             tail = node;
             current = tail;
-        }
+            size--;
+        }  
     }
     
     public void deleteMiddle() 
@@ -174,32 +212,32 @@ public class DoubleList {
 	current.setNext(null);
 	current.setPrev(null);
 	current = temp;
+        
+        size--;
     }
-    
-    public void removeTail() 
+   
+    public void deleteLast() 
     {
-	
-	tail = tail.getPrev();
-	current = tail;
-	tail.getNext().setPrev(null);
-	tail.setNext(null);
-    }
-    
-    public void removeLast() 
-    {
-	
 	head = null;
 	tail = null;
+        size--;
     }
+*/
     
-    
-    public void editTape(String title, int length, boolean lent)
+    public void applyEdit(String title, int length, boolean lent)
     {
+        // get the tape in the current node
         VideoTape tape = current.getTape();
         
+        // edit the tape details
         tape.setTitle(title);
         tape.setLength(length);
         tape.setLent(lent);       
+    }
+    
+    public int size()
+    {
+      return size;
     }
 
     /**

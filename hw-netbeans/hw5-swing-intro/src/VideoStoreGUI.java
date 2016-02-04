@@ -294,6 +294,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
         int length   = Integer.parseInt(lengthField.getText());
         boolean lent = isOnLoan.isSelected();
         currentNumber++;
+        
         VideoTape tape = new VideoTape(title,length,lent);
         tapes.add((currentNumber), tape);
         videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());

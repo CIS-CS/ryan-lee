@@ -9,28 +9,20 @@ class DoubleNode
 {
     // data member
     private VideoTape tape;
-    private String name;
-    private int length; 
-    private boolean lent; 
   
     // The fields that links nodes together.
     private DoubleNode next = null;
     private DoubleNode prev = null;
-    private int videoNumber = 0;
-    private int totalNumber = 0;
     
     public DoubleNode()
     {
-        name = "no name";    
+        tape = null;
     }
     
     public DoubleNode(VideoTape tape)
     {
         // Second Constructor for a student record, assigns fields
         setTape(tape);
-        name = tape.getTitle();
-        length = tape.getLength();
-        lent = tape.isLent();
     }
     
     // accessor methods
@@ -52,13 +44,13 @@ class DoubleNode
     {
         this.tape = tape;
     }
-    public void setNext( DoubleNode name)
+    public void setNext( DoubleNode nextNode)
     {
-        this.next = name;
+        this.next = nextNode;
     }
-    public void setPrev( DoubleNode prev)
+    public void setPrev( DoubleNode prevNode)
     {
-        this.prev = prev;
+        this.prev = prevNode;
     }
 }
 

@@ -11,22 +11,20 @@ import java.util.ArrayList;
  *
  * @author chrl98
  */
-public class VideoStoreGUIDoubleList extends javax.swing.JFrame {
+public class VideoStoreUI_v2 extends javax.swing.JFrame {
     
-    private DoubleList tapes;
     private int currentNumber;
-    private int max;
-    private DoubleList VideoTape = new DoubleList();
+    private DoubleList videoTape = new DoubleList();
+    
     
     
     /**
      * Creates new form VideoStoreGUI
      */
-    public VideoStoreGUIDoubleList() {
+    public VideoStoreUI_v2() {
      
         initComponents();
         currentNumber = -1; //-1 indicates no tapes in system
-        max = 0;
     }
 
     /**
@@ -301,21 +299,21 @@ public class VideoStoreGUIDoubleList extends javax.swing.JFrame {
         boolean lent = isOnLoan.isSelected();
         //currentNumber++;
         VideoTape tape = new VideoTape(title,length,lent);
-        DoubleNode node = new DoubleNode(VideoTape tape);
+        DoubleNode node = new DoubleNode(videoTape tape);
         
       if (max == 0)
       {
-          VideoTape.insertHead(node);
+          videoTape.insertHead(node);
       }
       
       else if (current == max)
       {
-          VideoTape.insertTail(node);
+          videoTape.insertTail(node);
       }
       
       else
       {
-          VideoTape.insertBefore(node);
+          videoTape.insertBefore(node);
       }
         
        
