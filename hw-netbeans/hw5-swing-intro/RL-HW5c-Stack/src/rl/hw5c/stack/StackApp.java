@@ -1,5 +1,5 @@
 // StackTester.java
-package page272_Stack;
+//package page272_Stack;
 
 /**
  *  StackTester.java
@@ -20,8 +20,10 @@ public class StackApp {
             s.push(102);
             s.push(103);
             s.push(104);
+            s.push(105);
             s.pop();
             s.pop();
+            
             System.out.println(s.toString());
         }
         catch (Exception e) {

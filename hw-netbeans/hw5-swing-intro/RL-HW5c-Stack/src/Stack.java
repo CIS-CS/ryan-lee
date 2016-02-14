@@ -46,7 +46,7 @@ public class Stack {
     {
         if (arrayList == null) 
         {  
-	    return arrayList.isEmpty();
+	    return true;
         }
         else 
         {
