@@ -11,9 +11,9 @@ package hw5.polymorphism.pkg5e;
  */
 public class RocketBike extends Bicycle {
     
-    public int ammo;
+    public double ammo;
 	
-     public RocketBike(int startCadence, int startSpeed, int startGear, int rocketAmmo)
+     public RocketBike(int startCadence, int startSpeed, int startGear, double rocketAmmo)
              {
         super(startCadence,
               startSpeed,
@@ -21,11 +21,11 @@ public class RocketBike extends Bicycle {
         this.setAmmo(rocketAmmo);
             }
     
-      public int getAmmo(){
+      public double getAmmo(){
       return this.ammo;
     }
 
-    public void setAmmo(int rocketAmmo) {
+    public void setAmmo(double rocketAmmo) {
         this.ammo = rocketAmmo;
     }
 
