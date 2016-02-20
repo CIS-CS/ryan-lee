@@ -30,11 +30,14 @@ public class Stack {
         arrayList.add(data);
     }
         
-    public int pop()
+    public int pop() throws EmptyStackException
     {
-        if (arrayList.isEmpty())
-                   throw new EmptyStackException();
-        return (int) arrayList.remove((arrayList.size()-1));
+        if (arrayList.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        else {
+            return (int) arrayList.remove((arrayList.size()-1));
+        }
     }
    
     public int arrayTop()
@@ -44,7 +47,7 @@ public class Stack {
 
     public boolean isEmpty()
     {
-        if (arrayList == null) 
+        if (arrayList.size() == 0) 
         {  
 	    return true;
         }

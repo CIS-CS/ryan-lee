@@ -93,6 +93,28 @@ public class DoubleList {
         
         size++;
     }
+    
+    public VideoTape get()
+    {
+        return (size == 0) ? null : current.getTape();
+        /*
+        if (size == 0)
+        {
+            return null;
+        } 
+        else
+        {
+            return current.getTape();
+        }
+        */
+    }
+    
+    //alternative way:
+    //return boolean exp ? val1:val2;
+    //return size==0?
+    
+    
+    
         
     public VideoTape getNextTape()
     {

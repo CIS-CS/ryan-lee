@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class VideoStoreUI_v2 extends javax.swing.JFrame {
     
     private int currentNumber;
-    private DoubleList videoTape = new DoubleList();
-    
+    private DoubleList tapes;
+  
     
     
     /**
@@ -25,6 +25,8 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
      
         initComponents();
         currentNumber = -1; //-1 indicates no tapes in system
+        tapes = new DoubleList();
+        
     }
 
     /**
@@ -239,13 +241,26 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
     }//GEN-LAST:event_titleFieldActionPerformed
 
     private void leftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftButtonActionPerformed
-     //works
+   
         if (currentNumber > 0){
-            currentNumber -= 1;
-            videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
-            titleField.setText(tapes.get(currentNumber).getTitle());
-            lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-            isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+            
+            VideoTape tape = tapes.getPreviousTape();
+            
+            if (tape == null)
+            {
+                // something bad has happened! We should never get here.
+                // JOptionPane - class to create message 
+                // System.exit() - method to abort
+            }
+            else
+            {
+                currentNumber -= 1;
+                videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+                
+                titleField.setText(tape.getTitle());        
+                lengthField.setText(Integer.toString(tape.getLength()));
+                isOnLoan.setSelected(tape.isLent());
+            }
         }
     }//GEN-LAST:event_leftButtonActionPerformed
 
@@ -299,21 +314,21 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
         boolean lent = isOnLoan.isSelected();
         //currentNumber++;
         VideoTape tape = new VideoTape(title,length,lent);
-        DoubleNode node = new DoubleNode(videoTape tape);
+        DoubleNode node = new DoubleNode(tape);
         
       if (max == 0)
       {
-          videoTape.insertHead(node);
+          tapes.insertHead(node);
       }
       
       else if (current == max)
       {
-          videoTape.insertTail(node);
+          tapes.insertTail(node);
       }
       
       else
       {
-          videoTape.insertBefore(node);
+          tapes.insertBefore(node);
       }
         
        

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 /*
@@ -290,14 +291,20 @@ public class VideoStoreGUI extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
      //works   
-        String title = titleField.getText();
-        int length   = Integer.parseInt(lengthField.getText());
-        boolean lent = isOnLoan.isSelected();
-        currentNumber++;
-        
-        VideoTape tape = new VideoTape(title,length,lent);
-        tapes.add((currentNumber), tape);
-        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
+        try {
+            String title = titleField.getText();
+            int length   = Integer.parseInt(lengthField.getText());
+            boolean lent = isOnLoan.isSelected();
+            currentNumber++;
+
+            VideoTape tape = new VideoTape(title,length,lent);
+            tapes.add((currentNumber), tape);
+            videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid length", "Error", JOptionPane.OK_OPTION);
+        }
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
