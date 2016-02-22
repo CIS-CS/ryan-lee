@@ -142,6 +142,22 @@ public class DoubleList {
         }
     }
     
+    public VideoTape getHead()
+    {	
+	return head.getTape();
+    }
+    
+    public VideoTape getTail()
+    {
+        return tail.getTape();
+    }
+    
+    public VideoTape getCurrent()
+    {
+        return current.getTape();
+    }
+
+    
     //Possible delete scenarios
     
    /* delete

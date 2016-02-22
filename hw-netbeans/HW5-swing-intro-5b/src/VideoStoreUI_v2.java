@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 /*
@@ -266,87 +267,97 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-     //works
+     if (currentNumber > 0){
         currentNumber = 0;
-        VideoTape tape = tapes.get(currentNumber);     
+        VideoTape tape = tapes.getHead();     
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
-        titleField.setText(tapes.get(currentNumber).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
-        
-     
+        titleField.setText(tapes.getHead().getTitle());
+        lengthField.setText(Integer.toString(tapes.getHead().getLength()));
+        isOnLoan.setSelected(tapes.getHead().isLent());
+    }
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
       //works
-        currentNumber = tapes.size() - 1;
+      
+        if (currentNumber <= tapes.size()){               
+        currentNumber = tapes.size()-1;
+        VideoTape tape = tapes.getTail(); 
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
-        titleField.setText(tapes.get(currentNumber).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+        titleField.setText(tapes.getTail().getTitle());
+        lengthField.setText(Integer.toString(tapes.getTail().getLength()));
+        isOnLoan.setSelected(tapes.getTail().isLent());
+    }
 
     }//GEN-LAST:event_endButtonActionPerformed
 
     private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
         //works
-        if (currentNumber < tapes.size() - 1){
-            currentNumber += 1;
-        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
-        titleField.setText(tapes.get(currentNumber).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
-       
-        }
+        
+        if (currentNumber > 0){
+            
+            VideoTape tape = tapes.getNextTape();
+            
+            if (tape == null)
+            {
+                // something bad has happened! We should never get here.
+                // JOptionPane - class to create message 
+                // System.exit() - method to abort
+            }
+            else
+            {
+                currentNumber += 1;
+                videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+                titleField.setText(tape.getTitle());        
+                lengthField.setText(Integer.toString(tape.getLength()));
+                isOnLoan.setSelected(tape.isLent());
+            }
+        }    
     }//GEN-LAST:event_rightButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
      //works   
-     
-     if (currentNumber < max)
+     /*
+     if (currentNumber < tapes.size())
      {
-        currentNumber++;
-        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
-     
+        currentNumber++; 
      }
-     
+        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
         String title = titleField.getText();
         int length   = Integer.parseInt(lengthField.getText());
         boolean lent = isOnLoan.isSelected();
-        //currentNumber++;
         VideoTape tape = new VideoTape(title,length,lent);
-        DoubleNode node = new DoubleNode(tape);
+        tapes.insertTail(new VideoTape(titleField.getText(), length, isOnLoan.isSelected())); */
         
-      if (max == 0)
-      {
-          tapes.insertHead(node);
-      }
-      
-      else if (current == max)
-      {
-          tapes.insertTail(node);
-      }
-      
-      else
-      {
-          tapes.insertBefore(node);
-      }
+        try {
+            String title = titleField.getText();
+            int length   = Integer.parseInt(lengthField.getText());
+            boolean lent = isOnLoan.isSelected();
+            currentNumber++;
+            
+
+            VideoTape tape = new VideoTape(title,length,lent);
+            tape = tapes.insertTail(VideoTape); 
+            videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
+           
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid length", "Error", JOptionPane.OK_OPTION);
+        }
+
         
-       
-    
-        tapes.add((currentNumber), tape);
-        //videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
      //works 
         if (currentNumber < tapes.size()){
-            tapes.remove(currentNumber);
+            tapes.delete();
         }
 
         videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        titleField.setText(tapes.get(currentNumber).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+        titleField.setText(tapes.getCurrent().getTitle());
+        lengthField.setText(Integer.toString(tapes.getCurrent().getLength()));
+        isOnLoan.setSelected(tapes.getCurrent().isLent());
         
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -355,7 +366,7 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
         String title = titleField.getText();
         int length   = Integer.parseInt(lengthField.getText());
         boolean lent = isOnLoan.isSelected();
-        VideoTape tape = tapes.get(currentNumber);
+        VideoTape tape = tapes.getCurrent();
 		  tape.setTitle(title);
 		  tape.setLength(length);
 		  tape.setLent(lent);
@@ -364,9 +375,9 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
        
-        titleField.setText(tapes.get(currentNumber-1).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber-1).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber-1).isLent());
+        titleField.setText((tapes.getCurrent()).getTitle());
+        lengthField.setText(Integer.toString(tapes.getCurrent().getLength()));
+        isOnLoan.setSelected(tapes.getCurrent().isLent());
         videoNumberLabel.setText((currentNumber) + " of " + tapes.size());
     }//GEN-LAST:event_cancelButtonActionPerformed
 
@@ -400,7 +411,7 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VideoStoreGUI().setVisible(true);
+                new VideoStoreUI_v2().setVisible(true);
             }
         });
     }
