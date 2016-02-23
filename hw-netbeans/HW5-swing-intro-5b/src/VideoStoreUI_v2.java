@@ -337,7 +337,7 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
             
 
             VideoTape tape = new VideoTape(title,length,lent);
-            tape = tapes.insertTail(VideoTape); 
+            tapes.insertTail(tape);
             videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
            
         }
