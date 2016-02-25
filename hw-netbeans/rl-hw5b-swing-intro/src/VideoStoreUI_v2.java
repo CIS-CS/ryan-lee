@@ -252,6 +252,7 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
                 // something bad has happened! We should never get here.
                 // JOptionPane - class to create message 
                 // System.exit() - method to abort
+                 JOptionPane.showMessageDialog(this, "No more tapes!", "Message", JOptionPane.OK_OPTION);
             }
             else
             {
@@ -267,7 +268,8 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-     if (currentNumber > 0){
+     
+        if (currentNumber > 0){
         currentNumber = 0;
         VideoTape tape = tapes.getHead();     
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
@@ -303,6 +305,7 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
                 // something bad has happened! We should never get here.
                 // JOptionPane - class to create message 
                 // System.exit() - method to abort
+                 JOptionPane.showMessageDialog(this, "No more tapes!", "Message", JOptionPane.OK_OPTION);
             }
             else
             {
