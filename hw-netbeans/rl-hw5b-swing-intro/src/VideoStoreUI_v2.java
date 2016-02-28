@@ -268,35 +268,34 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-     
-        if (currentNumber > 0){
+     //**    
         currentNumber = 0;
         VideoTape tape = tapes.getHead();     
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
         titleField.setText(tapes.getHead().getTitle());
         lengthField.setText(Integer.toString(tapes.getHead().getLength()));
         isOnLoan.setSelected(tapes.getHead().isLent());
-    }
+        
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
       //works
       
-        if (currentNumber <= tapes.size()){               
+      //  if (currentNumber < tapes.size()){               
         currentNumber = tapes.size()-1;
         VideoTape tape = tapes.getTail(); 
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
         titleField.setText(tapes.getTail().getTitle());
         lengthField.setText(Integer.toString(tapes.getTail().getLength()));
         isOnLoan.setSelected(tapes.getTail().isLent());
-    }
-
+    //}
+        
     }//GEN-LAST:event_endButtonActionPerformed
 
     private void rightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightButtonActionPerformed
-        //works
+        //**
         
-        if (currentNumber > 0){
+        if (currentNumber < tapes.size()){
             
             VideoTape tape = tapes.getNextTape();
             

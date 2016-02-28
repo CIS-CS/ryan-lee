@@ -247,7 +247,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
      //works
         if (currentNumber > 0){
             currentNumber -= 1;
-            videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+            videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
             titleField.setText(tapes.get(currentNumber).getTitle());
             lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
             isOnLoan.setSelected(tapes.get(currentNumber).isLent());
@@ -269,7 +269,7 @@ public class VideoStoreGUI extends javax.swing.JFrame {
 
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endButtonActionPerformed
       //works
-        currentNumber = tapes.size() - 1;
+        currentNumber = tapes.size() -1 ;
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
         titleField.setText(tapes.get(currentNumber).getTitle());
         lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
@@ -308,15 +308,15 @@ public class VideoStoreGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-     //works 
+     //occasionally not responsive
         if (currentNumber < tapes.size()){
             tapes.remove(currentNumber);
         }
 
-        videoNumberLabel.setText(currentNumber + " of " + tapes.size());
-        titleField.setText(tapes.get(currentNumber).getTitle());
-        lengthField.setText(Integer.toString(tapes.get(currentNumber).getLength()));
-        isOnLoan.setSelected(tapes.get(currentNumber).isLent());
+        videoNumberLabel.setText((currentNumber) + " of " + tapes.size());
+        titleField.setText(tapes.get(currentNumber - 1).getTitle());
+        lengthField.setText(Integer.toString(tapes.get(currentNumber - 1).getLength()));
+        isOnLoan.setSelected(tapes.get(currentNumber - 1).isLent());
         
     }//GEN-LAST:event_deleteButtonActionPerformed
 
