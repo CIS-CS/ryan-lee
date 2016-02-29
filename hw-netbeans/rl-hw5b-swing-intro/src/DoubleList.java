@@ -12,11 +12,19 @@
 public class DoubleList {
 
     // Instance variables
-    private DoubleNode head = null;
-    private DoubleNode tail = null;
-    private DoubleNode current = null;  // points to last inserted node
+    private DoubleNode head;
+    private DoubleNode tail;
+    private DoubleNode current;  // points to last accessed node
     private int size;
 
+    public DoubleList()
+    {
+        head = null;
+        tail = null;
+        current = null;  // points to last accessed node
+        size = 0;
+    }
+    
     /**
      *  Inserts a tape at the head of the list.
      *  @param tape The tape to insert.
@@ -142,14 +150,17 @@ public class DoubleList {
         }
     }
     
-    public VideoTape getHead()
+    public VideoTape getHead() // current pointer not moved
     {	
-	return head.getTape();
+        current = head;
+	return current.getTape();
+        
     }
     
-    public VideoTape getTail()
+    public VideoTape getTail() // current pointer not moved
     {
-        return tail.getTape();
+        current = tail;
+        return current.getTape();
     }
     
     public VideoTape getCurrent()

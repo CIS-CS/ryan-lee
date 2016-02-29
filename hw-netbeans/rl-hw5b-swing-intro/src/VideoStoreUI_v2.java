@@ -2,12 +2,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author chrl98
@@ -268,13 +262,18 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
 
  
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
-     //**    
+     //** 
+        // Get first tape
         currentNumber = 0;
-        VideoTape tape = tapes.getHead();     
-        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+        VideoTape tape = tapes.getHead(); 
+        
+        // Uodate the display fields
         titleField.setText(tapes.getHead().getTitle());
         lengthField.setText(Integer.toString(tapes.getHead().getLength()));
         isOnLoan.setSelected(tapes.getHead().isLent());
+        
+        // Update the x of y
+        videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
         
     }//GEN-LAST:event_homeButtonActionPerformed
 
@@ -283,8 +282,10 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
       
       //  if (currentNumber < tapes.size()){               
         currentNumber = tapes.size()-1;
-        VideoTape tape = tapes.getTail(); 
+        VideoTape tape = tapes.getTail();
+        
         videoNumberLabel.setText((currentNumber + 1) + " of " + tapes.size());
+        
         titleField.setText(tapes.getTail().getTitle());
         lengthField.setText(Integer.toString(tapes.getTail().getLength()));
         isOnLoan.setSelected(tapes.getTail().isLent());
@@ -376,11 +377,11 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
     }//GEN-LAST:event_applyButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-       
+       //fix 0 of 1 error
         titleField.setText((tapes.getCurrent()).getTitle());
         lengthField.setText(Integer.toString(tapes.getCurrent().getLength()));
         isOnLoan.setSelected(tapes.getCurrent().isLent());
-        videoNumberLabel.setText((currentNumber) + " of " + tapes.size());
+        videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**e
