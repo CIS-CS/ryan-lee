@@ -150,14 +150,13 @@ public class DoubleList {
         }
     }
     
-    public VideoTape getHead() // current pointer not moved
+    public VideoTape getHead() 
     {	
         current = head;
 	return current.getTape();
-        
     }
     
-    public VideoTape getTail() // current pointer not moved
+    public VideoTape getTail() 
     {
         current = tail;
         return current.getTape();
