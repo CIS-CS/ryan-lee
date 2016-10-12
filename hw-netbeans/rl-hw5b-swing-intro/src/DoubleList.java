@@ -66,7 +66,7 @@ public class DoubleList {
             // Add the node to the empty list.
             head = node;
             tail = node;
-            current = node;
+            current = tail;
         }
         else
         {
@@ -87,7 +87,14 @@ public class DoubleList {
     public void insertBefore(VideoTape tape) 
     {
         //to be implemented later
+        
+        //DoubleNode node = new DoubleNode()
     }
+    
+         /**
+     *  Inserts a tape after a selected tape item of the list.
+     *  @param tape The tape to insert.
+     */
     
     public void insertAfter(VideoTape tape)
     {
@@ -197,8 +204,8 @@ public class DoubleList {
         else if (current == head)
         {
             // current is pointing at first node of the list
-            head = head.getNext();
-            current = current.getNext();
+            head = head.getNext(); 
+           current = current.getNext();
             current.getPrev().setNext(null);
             current.setPrev(null);
             size--;

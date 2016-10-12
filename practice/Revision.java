@@ -24,6 +24,7 @@ public class Revision extends Object
 		subjectsTaught[4] = "Chinese";
 		subjectsTaught[5] = "Biology";
 		subjectsTaught[6] = "Economics";
+		subjectsTaught[7] = "Psychology";
     }
 
 	//method which generates random number between 0 and 6. 
