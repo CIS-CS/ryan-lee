@@ -67,8 +67,19 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
             }
         });
 
+        lengthField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lengthFieldActionPerformed(evt);
+            }
+        });
+
         isOnLoan.setSelected(true);
         isOnLoan.setText("On Loan");
+        isOnLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                isOnLoanActionPerformed(evt);
+            }
+        });
 
         homeButton.setText("|<");
         homeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -383,6 +394,14 @@ public class VideoStoreUI_v2 extends javax.swing.JFrame {
         isOnLoan.setSelected(tapes.getCurrent().isLent());
         videoNumberLabel.setText((currentNumber+1) + " of " + tapes.size());
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void lengthFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lengthFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lengthFieldActionPerformed
+
+    private void isOnLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isOnLoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_isOnLoanActionPerformed
 
     /**e
      * @param args the command line arguments
