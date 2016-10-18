@@ -88,7 +88,7 @@ public class manualEntry extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("MANUAL ENTRY");
+        jLabel6.setText("Manual Entry");
 
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +225,7 @@ public class manualEntry extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new GuardStationAppGUI().setVisible(true);
+        new entryExitForm().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
