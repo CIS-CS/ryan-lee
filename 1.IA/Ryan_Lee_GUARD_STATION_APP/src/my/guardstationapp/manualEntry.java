@@ -30,6 +30,7 @@ public class manualEntry extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         advisoryField = new javax.swing.JTextField();
         nameField = new javax.swing.JTextField();
         timeField = new javax.swing.JTextField();
@@ -39,10 +40,19 @@ public class manualEntry extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dateField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        exitButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+
+        jButton2.setText("<");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,10 +90,24 @@ public class manualEntry extends javax.swing.JFrame {
 
         jLabel6.setText("MANUAL ENTRY");
 
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+
         saveButton.setText("Save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("<");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -118,10 +142,14 @@ public class manualEntry extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(72, 72, 72)
                 .addComponent(saveButton)
-                .addGap(0, 164, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(exitButton)
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +172,12 @@ public class manualEntry extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitButton)
+                    .addComponent(saveButton)
+                    .addComponent(jButton3))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -154,6 +185,7 @@ public class manualEntry extends javax.swing.JFrame {
 
     private void advisoryFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_advisoryFieldActionPerformed
         String advisory = this.advisoryField.getText();
+
     }//GEN-LAST:event_advisoryFieldActionPerformed
 
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
@@ -168,12 +200,33 @@ public class manualEntry extends javax.swing.JFrame {
         String date = this.dateField.getText();
     }//GEN-LAST:event_dateFieldActionPerformed
 
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+     //  if ((advisory.equals("")) || (name.equals("")) || (time.equals("")) || (date.equals("")))
+    //{
+     // System.out.println("Error!\nfill in all fields!");
+    //}
+    
+    System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-       if ((advisory.equals("")) || (name.equals("")) || (time.equals("")) || (date.equals("")))
-    {
-      System.out.println("Error!\nfill in all fields!");
-    }
+        // TODO add your handling code here:
+        
+        String advisory = this.advisoryField.getText();
+        
+        if ((advisory.equals(""))) {
+           // System.out.println ("Error!\nfill in all fields!");
+            JOptionPane.showMessageDialog(this, "All fields must be filled!!!", "Error", JOptionPane.OK_OPTION);
+        }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new GuardStationAppGUI().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new GuardStationAppGUI().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,6 +266,9 @@ public class manualEntry extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField advisoryField;
     private javax.swing.JTextField dateField;
+    private javax.swing.JButton exitButton;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
