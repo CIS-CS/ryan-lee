@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.*;
 
 /**
  *
@@ -21,6 +22,10 @@ public class DatabaseConnection {
     static final String PASS = "password";
    
    public static void main(String[] args) {
+       
+       ArrayList columnNames = new ArrayList();
+       ArrayList data = new ArrayList();
+        
         Connection conn = null;
         Statement stmt = null;
 
@@ -38,7 +43,7 @@ public class DatabaseConnection {
            String sql;
            sql = "SELECT name, age FROM test;";
            ResultSet rs = stmt.executeQuery(sql);
-
+           
            //STEP 5: Extract data from result set
            while(rs.next()){
               //Retrieve by column name
