@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class DatabaseConnection {
     
-    private ArrayList<Student> students = new ArrayList<Student>();
+    private static ArrayList<Student> students = new ArrayList<Student>();
     
     // JDBC driver name and database URL
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
@@ -27,7 +27,7 @@ public class DatabaseConnection {
     private Connection conn = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    
+       
     /**
      * Establishes connection to the database.
      * 
@@ -51,36 +51,37 @@ public class DatabaseConnection {
             throw e;
         }    
     }        
-    
-    /**
-     * Reads the SQL database to retrieve student data.
-     * 
-     * @return ArrayList of student objects
-     * @throws Exception 
-     */
-    public ArrayList read() throws SQLException // Do try catch blocks for this method. Error message in UI class needed.
+   
+   
+    public ArrayList<Student> read(String name, String id) throws SQLException // Do try catch blocks for this method. Error message in UI class needed.
     {
-        try {
-        // Execute a query
-        //System.out.println("Creating statement...");
-        stmt = conn.createStatement();
-        String sql = "SELECT fullName, StudentID FROM student_table;";
-        rs = stmt.executeQuery(sql);
-        //System.out.println(sql);
-
-        // Extract data from result set
-        while(rs.next()) {
-            
-            Student student = new Student(rs.getString("FullName"), rs.getString("StudentID"));
-            students.add(student);
-        }
-        return students;
-    }
         
-         catch (SQLException e) {
-            throw e;
-        } 
+      //  String sql = "SELECT StudentID,FullName FROM student_table " +
+                 //    "WHERE StudentID like '1009498' " + 
+                 //    "AND FullName    like '%Ryan%' ";
+       
+      String sql =  ("SELECT StudentID,FullName FROM student_table " +
+                    "WHERE StudentID like '" + (id.trim()) + "' " +
+                    "AND FullName like '" + (name.trim()) + "'");
+      stmt = conn.createStatement();
+        
+        students.clear();
+        
+        rs = stmt.executeQuery(sql);
+        while(rs.next()) {    
+        //    students.add(rs.getString("FullName"),rs.getInt("StudentID"));      
+            Student s = new Student(rs.getString("FullName"), rs.getString("StudentID"));   
+            students.add(s);
+        }
+       
+        return students; 
     }
+    
+    public void createTable() throws SQLException
+    {
+        stmt = conn.createStatement();
+        String sql = "CREATE TABLE Log(Name String, ID String)";  
+    }        
     
     /**
      * Closes the database connection.
@@ -121,10 +122,6 @@ public class DatabaseConnection {
            }//end finally try
         }
         System.out.println("Goodbye");
-    }
-    
-     public static void main(String args[]) {
-         
     }
    
 }

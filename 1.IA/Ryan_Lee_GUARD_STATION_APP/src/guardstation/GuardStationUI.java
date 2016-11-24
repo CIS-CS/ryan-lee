@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 import guardstation.StudentTableModel;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,15 +26,8 @@ public class GuardStationUI extends javax.swing.JFrame {
      */
     public GuardStationUI() {
         initComponents();
-        DatabaseConnection s = new DatabaseConnection();
         resultTable.setModel(new StudentTableModel());
-        try {
-           // readDataFile();
-        }
-        catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Read failed: " + e.toString(),
-                    "Read File", JOptionPane.ERROR_MESSAGE);
-        }
+
     }
     
 
@@ -54,13 +49,14 @@ public class GuardStationUI extends javax.swing.JFrame {
         resultTable = new javax.swing.JTable();
         createLogButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
-        identificationField = new javax.swing.JTextField();
+        idField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         entryFreeButton = new javax.swing.JButton();
         exitFreeButton = new javax.swing.JButton();
         exitLunchButton = new javax.swing.JButton();
         entryLunchButton = new javax.swing.JButton();
         showLogButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -132,19 +128,9 @@ public class GuardStationUI extends javax.swing.JFrame {
             }
         });
 
-        nameField.setText("Enter student name");
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
+        nameField.setText("Enter student name OR");
 
-        identificationField.setText("Enter student ID");
-        identificationField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                identificationFieldActionPerformed(evt);
-            }
-        });
+        idField.setText("Enter student ID");
 
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,28 +139,28 @@ public class GuardStationUI extends javax.swing.JFrame {
             }
         });
 
-        entryFreeButton.setText("Entry (Free)");
+        entryFreeButton.setText("ENTRY (Free)");
         entryFreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entryFreeButtonActionPerformed(evt);
             }
         });
 
-        exitFreeButton.setText("Exit (Free)");
+        exitFreeButton.setText("EXIT (Free)");
         exitFreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitFreeButtonActionPerformed(evt);
             }
         });
 
-        exitLunchButton.setText("Exit (Lunch)");
+        exitLunchButton.setText("EXIT (Lunch)");
         exitLunchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitLunchButtonActionPerformed(evt);
             }
         });
 
-        entryLunchButton.setText("Entry (Lunch)");
+        entryLunchButton.setText("ENTRY (Lunch)");
         entryLunchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entryLunchButtonActionPerformed(evt);
@@ -185,6 +171,13 @@ public class GuardStationUI extends javax.swing.JFrame {
         showLogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showLogButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -203,42 +196,47 @@ public class GuardStationUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(searchButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(exitFreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(entryFreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(showLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(exitLunchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(entryLunchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(createLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                                    .addComponent(identificationField))))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                                    .addComponent(idField)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(exitFreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(entryFreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(showLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(exitLunchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(entryLunchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(createLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(searchButton)
+                        .addGap(38, 38, 38)
+                        .addComponent(deleteButton)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton)
+                    .addComponent(deleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(identificationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(searchButton)
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitFreeButton)
                     .addComponent(entryFreeButton)
@@ -266,41 +264,75 @@ public class GuardStationUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_createLogButtonActionPerformed
 
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        String searchResult = nameField.getText();
-    }//GEN-LAST:event_nameFieldActionPerformed
-
-    private void identificationFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificationFieldActionPerformed
-        String studentID = identificationField.getText();
-    }//GEN-LAST:event_identificationFieldActionPerformed
-
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+      
+        // need to validate ID and name
+        String name = nameField.getText();
+        String id   = idField.getText();  
+        
+        DatabaseConnection conn = new DatabaseConnection();
+        
+        try {
+            conn.connect();
+            
+            ArrayList<Student> data = conn.read(name, id);  // a variable that can point to an ArrayList object.
+          
+            StudentTableModel model = (StudentTableModel)resultTable.getModel();
+            
+            model.add(data);
+            
+            conn.close();
+        }
+        catch (Exception e) {
+            //System.out.println(e.toString());
+            JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
+        }
+        
+        
+       // StudentTableModel model = (StudentTableModel)resultTable.getModel();
+       // System.out.println(s);
+       // model.add(new Student(nameField.getText(), Integer.parseInt(idField.getText())));
+      
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void entryFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryFreeButtonActionPerformed
-        // TODO add your handling code here:
+        
+        StudentTableModel model = (StudentTableModel)resultTable.getModel();
+       // model.add(new Student(nameField.getText(), Integer.parseInt(idField.getText())));
+        
     }//GEN-LAST:event_entryFreeButtonActionPerformed
 
     private void exitFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFreeButtonActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_exitFreeButtonActionPerformed
 
     private void exitLunchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitLunchButtonActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_exitLunchButtonActionPerformed
 
     private void searchButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton5ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_searchButton5ActionPerformed
 
     private void entryLunchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryLunchButtonActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_entryLunchButtonActionPerformed
 
     private void showLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLogButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_showLogButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+                // Check to see if user selected a row
+        int row = resultTable.getSelectedRow();
+        
+        if (row != -1) {            // -1 means no row selected
+            // Get the table model
+            StudentTableModel model = (StudentTableModel)resultTable.getModel();
+            // Remove the selected student from the table
+            model.delete(row);
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,11 +378,12 @@ public class GuardStationUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createLogButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton entryFreeButton;
     private javax.swing.JButton entryLunchButton;
     private javax.swing.JButton exitFreeButton;
     private javax.swing.JButton exitLunchButton;
-    private javax.swing.JTextField identificationField;
+    private javax.swing.JTextField idField;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JMenu jMenu1;

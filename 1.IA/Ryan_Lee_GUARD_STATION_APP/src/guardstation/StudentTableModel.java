@@ -12,7 +12,7 @@ import java.util.Collections;
  */
 public class StudentTableModel extends AbstractTableModel {
 
-    private String[] columnNames = {"GivenName", "Student ID"};
+    private String[] columnNames = {"FullName", "Student ID"};
     private ArrayList<Student> data = new ArrayList<Student>();
     /*
     private Object[][] data = {
@@ -81,10 +81,10 @@ public class StudentTableModel extends AbstractTableModel {
 
         Student student = data.get(row);
         if (col == 0) {
-            student.setGivenNameUsed((String)value);
+          //  student.setGivenNameUsed((String)value);
         }
         else {
-            student.setStudentID((String)value);
+          //  student.setStudentID((String)value);
         }
         data.set(row, student);
         fireTableCellUpdated(row, col); 
@@ -93,9 +93,9 @@ public class StudentTableModel extends AbstractTableModel {
 
     // MH added this method.
     // Called by the actionListener for the Add button.
-    public void add(Student student) {
+    public void add(ArrayList<Student> students) {
 
-        data.add(student);
+        data = students;
         //Collections.sort(data);
         fireTableDataChanged();     // Tell table that the data has changed
     }

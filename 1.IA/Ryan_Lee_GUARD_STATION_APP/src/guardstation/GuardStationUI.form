@@ -93,55 +93,62 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                      <Component id="searchButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="exitFreeButton" min="-2" pref="103" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="entryFreeButton" min="-2" pref="103" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="showLogButton" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="exitLunchButton" min="-2" pref="103" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="entryLunchButton" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="createLogButton" min="-2" pref="103" max="-2" attributes="0"/>
-                          </Group>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="320" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="nameField" alignment="0" pref="320" max="32767" attributes="0"/>
-                                  <Component id="identificationField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="idField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="exitFreeButton" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="entryFreeButton" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="showLogButton" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="exitLunchButton" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="entryLunchButton" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="createLogButton" min="-2" pref="103" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <Component id="searchButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="43" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="nameField" min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="nameField" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="idField" min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="searchButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="identificationField" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="searchButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="303" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exitFreeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="entryFreeButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -205,19 +212,13 @@
     </Component>
     <Component class="javax.swing.JTextField" name="nameField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter student name"/>
+        <Property name="text" type="java.lang.String" value="Enter student name OR"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameFieldActionPerformed"/>
-      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="identificationField">
+    <Component class="javax.swing.JTextField" name="idField">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enter student ID"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="identificationFieldActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="searchButton">
       <Properties>
@@ -229,7 +230,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="entryFreeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entry (Free)"/>
+        <Property name="text" type="java.lang.String" value="ENTRY (Free)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entryFreeButtonActionPerformed"/>
@@ -237,7 +238,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="exitFreeButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Exit (Free)"/>
+        <Property name="text" type="java.lang.String" value="EXIT (Free)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitFreeButtonActionPerformed"/>
@@ -245,7 +246,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="exitLunchButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Exit (Lunch)"/>
+        <Property name="text" type="java.lang.String" value="EXIT (Lunch)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitLunchButtonActionPerformed"/>
@@ -253,7 +254,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="entryLunchButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entry (Lunch)"/>
+        <Property name="text" type="java.lang.String" value="ENTRY (Lunch)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entryLunchButtonActionPerformed"/>
@@ -265,6 +266,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showLogButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
