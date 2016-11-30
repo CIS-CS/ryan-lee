@@ -253,20 +253,24 @@ public class GuardStationUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLogButtonActionPerformed
-        // TODO add your handling code here:
-           try {
-                String sql = "SELECT StudentID,FullName,YearGrade,Homeroom FROM student_table WHERE StudentID =?";
-
+        DatabaseConnection conn = new DatabaseConnection();
+        
+        try{
+            conn.createLogTable();
+            
+            
+            
         }
-        catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Invalid length", "Error", JOptionPane.OK_OPTION);
+        
+        catch (Exception e) {
+             JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
         }
-
     }//GEN-LAST:event_createLogButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
       
         // need to validate ID and name
+        
         String name = nameField.getText();
         String id   = idField.getText();  
         
@@ -297,13 +301,26 @@ public class GuardStationUI extends javax.swing.JFrame {
 
     private void entryFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryFreeButtonActionPerformed
         
-        StudentTableModel model = (StudentTableModel)resultTable.getModel();
+      //  StudentTableModel model = (StudentTableModel)resultTable.getModel();
        // model.add(new Student(nameField.getText(), Integer.parseInt(idField.getText())));
         
     }//GEN-LAST:event_entryFreeButtonActionPerformed
 
     private void exitFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFreeButtonActionPerformed
-       
+        String name = nameField.getText();
+        String id   = idField.getText();  
+        
+        DatabaseConnection conn = new DatabaseConnection();
+        
+     //   try {
+            
+    //    }
+        
+     //   catch {
+            
+     //   }
+        
+        
     }//GEN-LAST:event_exitFreeButtonActionPerformed
 
     private void exitLunchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitLunchButtonActionPerformed

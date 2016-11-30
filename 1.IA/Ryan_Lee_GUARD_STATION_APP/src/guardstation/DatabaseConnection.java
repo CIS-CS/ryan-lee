@@ -57,13 +57,14 @@ public class DatabaseConnection {
     {
         
       //  String sql = "SELECT StudentID,FullName FROM student_table " +
-                 //    "WHERE StudentID like '1009498' " + 
-                 //    "AND FullName    like '%Ryan%' ";
+           //          "WHERE StudentID like '1009498' " + 
+         //            "AND FullName    like '%Ryan%' ";
        
       String sql =  ("SELECT StudentID,FullName FROM student_table " +
-                    "WHERE StudentID like '" + (id.trim()) + "' " +
-                    "AND FullName like '" + (name.trim()) + "'");
+                   "WHERE StudentID like  '" + (id) + "'   " +
+                   "AND FullName like '%" + (name) +"%' ");
       stmt = conn.createStatement();
+      System.out.println(sql);
         
         students.clear();
         
@@ -77,7 +78,15 @@ public class DatabaseConnection {
         return students; 
     }
     
-    public void createTable() throws SQLException
+  //  public ArrayList<Student> add(String name, String id) //throws SQLException //adds entry to log table
+   // {
+     //   String sql = ("INSERT INTO studentlog (name, id) VALUES '" +(name));
+     //   stmt = conn.createStatement();
+       // rs = stmt.executeQuery(sql);
+        
+   // }        
+    
+    public void createLogTable() throws SQLException
     {
         stmt = conn.createStatement();
         String sql = "CREATE TABLE Log(Name String, ID String)";  
