@@ -120,8 +120,10 @@ public class Database {
             throw e;
         }     
         
-        String sql = "INSERT INTO studentlog (name, id, timein, timeout, reason) VALUES ('Ryan Lee','1009498');";
+        String sql = "INSERT INTO studentlog (name,id,timein,timeout,reason) VALUES ('David','252','David','David','David');";
+      //  String sql = "INSERT INTO studentlog (name, id, timein, timeout, reason) VALUES ('David', '25782', 'xDD','xD', 'xD');";
        // String sql = ("INSERT INTO studentlog (name,id) VALUES ('" + (name) +"', '" + (id) + "';");
+       System.out.println(sql);
         stmt = conn.createStatement();
         rs = stmt.executeQuery(sql);
         //return students;
