@@ -94,7 +94,7 @@ public class Database {
     
     
     // public void writeToLog(String name, String id, String purpose) throws ClassNotFoundException, SQLException // reading ONE ROW only every time the button is pressed)
-    public void writeToLog() throws ClassNotFoundException, SQLException        
+    public void writeToLog(String selectedObject) throws ClassNotFoundException, SQLException        
             // DONT SELECT MORE THAN ONE ITEM
             // CONSIDER multiple entries
     {
@@ -120,13 +120,14 @@ public class Database {
             throw e;
         }     
         
-        String sql = "INSERT INTO studentlog (name,id,timein,timeout,reason) VALUES ('David','252','David','David','David');";
-      //  String sql = "INSERT INTO studentlog (name, id, timein, timeout, reason) VALUES ('David', '25782', 'xDD','xD', 'xD');";
+        
+         String sql = "INSERT INTO studentlog (name,id,timein,timeout,reason) VALUES ('"+selectedObject+"',null,null,null,null);";
        // String sql = ("INSERT INTO studentlog (name,id) VALUES ('" + (name) +"', '" + (id) + "';");
-       System.out.println(sql);
+       
         stmt = conn.createStatement();
+        System.out.println(sql);
         rs = stmt.executeQuery(sql);
-        //return students;
+        
     }        
   
     public void getSystemTime()

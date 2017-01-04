@@ -158,6 +158,11 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         });
 
         exitFreeButton.setText("EXIT (Free)");
+        exitFreeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                exitFreeButtonMousePressed(evt);
+            }
+        });
         exitFreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitFreeButtonActionPerformed(evt);
@@ -343,7 +348,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                 model.add(data);                
             }
             catch (Exception e) {   
-                JOptionPane.showMessageDialog(this, "Database error.", "Error", JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
             }
         }        
         
@@ -406,20 +411,30 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         System.out.println(row); */
         
        // System.out.println(resultTable.getSelectedRow());
-        
-        Database conn = new Database();
+       
+            Database conn = new Database();
+       
+         StudentTableModel model = (StudentTableModel)resultTable.getModel();
+         
+            //    int selectedRowIndex = resultTable.getSelectedRow();
+            //    int selectedColumnIndex = resultTable.getSelectedColumn();
+            
+             int column = resultTable.getSelectedColumn();
+             int row = resultTable.getSelectedRow();
         
         try {
               // ArrayList<Student> data = conn.read(name, id);
               // conn.writeToLog(name,id,"in_lunch");
               
-                      int column = 1;
-int row = resultTable.getSelectedRow();
-String value = resultTable.getModel().getValueAt(row, column).toString();
-System.out.println(value);
-
-           //   conn.writeToLog();
-              //conn.getSystemTime();
+               
+                String selectedObject = (String) resultTable.getModel().getValueAt(column, row).toString();
+              //  String value = resultTable.getModel().getValueAt(row,column).toString();
+            //  String name = resultTable.getModel().getValueAt(selectedRowIndex, selectedColumnIndex).toString();
+                System.out.println(selectedObject);
+ 
+ 
+               conn.writeToLog(selectedObject);
+                //conn.getSystemTime();
                 
         }
         
@@ -437,7 +452,7 @@ System.out.println(value);
         
         try {
 
-              conn.writeToLog();
+             // conn.writeToLog();
                 
         }
         
@@ -479,6 +494,10 @@ System.out.println(value);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void exitFreeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitFreeButtonMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_exitFreeButtonMousePressed
 
     /**
      * @param args the command line arguments
