@@ -29,8 +29,6 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
 
     }
     
-
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +45,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultTable = new javax.swing.JTable();
-        createLogButton = new javax.swing.JButton();
+        exportLogButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
         idField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
@@ -58,7 +56,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         clearButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        entryFreeButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -128,6 +126,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                 return canEdit [columnIndex];
             }
         });
+        resultTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(resultTable);
         if (resultTable.getColumnModel().getColumnCount() > 0) {
             resultTable.getColumnModel().getColumn(0).setResizable(false);
@@ -137,10 +136,10 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
             resultTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        createLogButton.setText("Export Log");
-        createLogButton.addActionListener(new java.awt.event.ActionListener() {
+        exportLogButton.setText("Export Log");
+        exportLogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createLogButtonActionPerformed(evt);
+                exportLogButtonActionPerformed(evt);
             }
         });
 
@@ -201,10 +200,10 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
 
         jLabel2.setText("ID:");
 
-        jButton1.setText("RETURN (Free)");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entryFreeButton.setText("RETURN (Free)");
+        entryFreeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entryFreeButtonActionPerformed(evt);
             }
         });
 
@@ -252,7 +251,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(entryFreeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(showLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(22, 22, 22))
@@ -260,7 +259,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                                 .addGap(23, 23, 23)
                                 .addComponent(entryLunchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(createLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(exportLogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
@@ -282,34 +281,32 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(entryFreeButton)
                     .addComponent(exitFreeButton)
                     .addComponent(showLogButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitLunchButton)
                     .addComponent(entryLunchButton)
-                    .addComponent(createLogButton))
+                    .addComponent(exportLogButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createLogButtonActionPerformed
+    private void exportLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportLogButtonActionPerformed
         Database conn = new Database();
         
         try{
-            conn.createLogTable();
-            
-            
+            conn.exportLog();
             
         }
         
         catch (Exception e) {
              JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
         }
-    }//GEN-LAST:event_createLogButtonActionPerformed
+    }//GEN-LAST:event_exportLogButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
       
@@ -320,7 +317,7 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         
         System.out.println("name = " + name);
         
-        if(name==null)
+        if(name == null)
         {
             System.out.println("name equals null");
         }
@@ -351,97 +348,31 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
                 JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
             }
         }        
-        
-     /* 
-     //   if (nameField.get) == null && id == null)
-     //   {
-    //        System.out.println("ERROR! No values filled!!"); //does it return null?
-      //  }
-        
-       // Database conn = new Database();
-        //conn.read(); 
-        
-      //  try {
-            conn.connect(); //Refactoring -- passing input to DBConnector class.
             
-        //    ArrayList<Student> data = conn.read(name, id);  // a variable that can point to an ArrayList object.
-            
+          //  conn.close();      
 
-         //   else if (idField.getText().equals(""))
-         //   {
-         //       JOptionPane.showMessageDialog(this, "No student ID received.", "Error", JOptionPane.OK_OPTION);
-         //   }
-
-            if (nameField.getText().equals(""))
-            {
-
-            }
-
-            if (idField.getText().equals(""))
-            {
-
-            }
-            
-         //   StudentTableModel model = (StudentTableModel)resultTable.getModel();
-            
-         //   model.add(data);
-            
-            conn.close();      
-        }
-        catch (Exception e) {   
-            JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
-        }
-              
-       // StudentTableModel model = (StudentTableModel)resultTable.getModel();
-       // System.out.println(s);
-       // model.add(new Student(nameField.getText(), Integer.parseInt(idField.getText())));
-        
-        */
-      
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void exitFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitFreeButtonActionPerformed
-        
-        
-      //  String name = nameField.getText();
-      //  String id   = idField.getText();  
-       
-      /*
-        int row = resultTable.getSelectedRow();  
-        System.out.println(row); */
-        
-       // System.out.println(resultTable.getSelectedRow());
-       
-            Database conn = new Database();
-       
-         StudentTableModel model = (StudentTableModel)resultTable.getModel();
+
+        Database conn = new Database();
          
-            //    int selectedRowIndex = resultTable.getSelectedRow();
-            //    int selectedColumnIndex = resultTable.getSelectedColumn();
-            
-             int column = resultTable.getSelectedColumn();
-             int row = resultTable.getSelectedRow();
+        int row = resultTable.getSelectedRow();
+
+        String name = (String)(resultTable.getValueAt(row, 0));
+        String id   = (String)(resultTable.getValueAt(row, 1));
+        String status = "exit_free";
+        System.out.println(name);
+        System.out.println(id);
         
-        try {
-              // ArrayList<Student> data = conn.read(name, id);
-              // conn.writeToLog(name,id,"in_lunch");
-              
-               
-                String selectedObject = (String) resultTable.getModel().getValueAt(column, row).toString();
-              //  String value = resultTable.getModel().getValueAt(row,column).toString();
-            //  String name = resultTable.getModel().getValueAt(selectedRowIndex, selectedColumnIndex).toString();
-                System.out.println(selectedObject);
- 
- 
-               conn.writeToLog(selectedObject);
-                //conn.getSystemTime();
-                
+        
+        try {    
+            conn.writeToLog(name,id, status);
         }
-        
         catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(this, 
+                    "Database write failed: " + e.toString(), "Error", JOptionPane.OK_OPTION);
         }
-        
        
         
     }//GEN-LAST:event_exitFreeButtonActionPerformed
@@ -449,18 +380,25 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
     private void exitLunchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitLunchButtonActionPerformed
         
         Database conn = new Database();
-        
-        try {
+         
+        int row = resultTable.getSelectedRow();
 
-             // conn.writeToLog();
-                
-        }
+        String name = (String)(resultTable.getValueAt(row, 0));
+        String id   = (String)(resultTable.getValueAt(row, 1));
+        String status = "exit_lunch";
+        System.out.println(name);
+        System.out.println(id);
         
+        
+        try {    
+            conn.writeToLog(name,id, status);
+        }
         catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "Database connection failed.", "Error", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(this, 
+                    "Database write failed: " + e.toString(), "Error", JOptionPane.OK_OPTION);
         }
-        
        
+        
     }//GEN-LAST:event_exitLunchButtonActionPerformed
 
     private void searchButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton5ActionPerformed
@@ -469,9 +407,44 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
 
     private void entryLunchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryLunchButtonActionPerformed
        
+        Database conn = new Database();
+         
+        int row = resultTable.getSelectedRow();
+
+        String name = (String)(resultTable.getValueAt(row, 0));
+        String id   = (String)(resultTable.getValueAt(row, 1));
+        String status = "entry_lunch";
+        System.out.println(name);
+        System.out.println(id);
+        
+        
+        try {    
+            conn.writeToLog(name,id, status);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Database write failed: " + e.toString(), "Error", JOptionPane.OK_OPTION);
+        }
+       
     }//GEN-LAST:event_entryLunchButtonActionPerformed
 
     private void showLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLogButtonActionPerformed
+                       
+        Database conn = new Database();
+        
+        try {    
+            
+            // retrieves studentlog.
+            ArrayList<Student> data = conn.getLog();  // a variable that can point to an ArrayList object.
+
+            // Update table model.
+            StudentTableModel model = (StudentTableModel)resultTable.getModel();
+            model.add(data);   
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+            "Database write failed: " + e.toString(), "Error", JOptionPane.OK_OPTION);
+        }
         
     }//GEN-LAST:event_showLogButtonActionPerformed
 
@@ -491,9 +464,26 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void entryFreeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryFreeButtonActionPerformed
+         Database conn = new Database();
+         
+        int row = resultTable.getSelectedRow();
+
+        String name = (String)(resultTable.getValueAt(row, 0));
+        String id   = (String)(resultTable.getValueAt(row, 1));
+        String status = "entry_free";
+        System.out.println(name);
+        System.out.println(id);
+        
+        
+        try {    
+            conn.writeToLog(name,id, status);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Database write failed: " + e.toString(), "Error", JOptionPane.OK_OPTION);
+        }
+    }//GEN-LAST:event_entryFreeButtonActionPerformed
 
     private void exitFreeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitFreeButtonMousePressed
         // TODO add your handling code here:
@@ -544,12 +534,12 @@ public class GuardStationUI extends javax.swing.JFrame { //in charge of notifyin
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton clearButton;
-    private javax.swing.JButton createLogButton;
+    private javax.swing.JButton entryFreeButton;
     private javax.swing.JButton entryLunchButton;
     private javax.swing.JButton exitFreeButton;
     private javax.swing.JButton exitLunchButton;
+    private javax.swing.JButton exportLogButton;
     private javax.swing.JTextField idField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;

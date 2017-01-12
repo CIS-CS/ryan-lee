@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="jFrame1">
 
@@ -135,7 +135,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="entryFreeButton" min="-2" pref="116" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="showLogButton" min="-2" pref="103" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
@@ -144,7 +144,7 @@
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="entryLunchButton" min="-2" pref="124" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="createLogButton" min="-2" pref="103" max="-2" attributes="0"/>
+                              <Component id="exportLogButton" min="-2" pref="103" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -175,7 +175,7 @@
               <Component id="jScrollPane1" min="-2" pref="303" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="entryFreeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="exitFreeButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="showLogButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -183,7 +183,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exitLunchButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="entryLunchButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="createLogButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLogButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -238,6 +238,9 @@
                 </Column>
               </TableColumnModel>
             </Property>
+            <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+              <JTableSelectionModel selectionMode="0"/>
+            </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -245,12 +248,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="createLogButton">
+    <Component class="javax.swing.JButton" name="exportLogButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Export Log"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createLogButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportLogButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nameField">
@@ -319,12 +322,12 @@
         <Property name="text" type="java.lang.String" value="ID:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="entryFreeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="RETURN (Free)"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entryFreeButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

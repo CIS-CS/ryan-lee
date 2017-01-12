@@ -14,6 +14,7 @@ import java.util.*;
  */
 public class Database {
     
+    // Being used as the model for the Jtable
     private static ArrayList<Student> students = new ArrayList<Student>();
     
     // JDBC driver name and database URL
@@ -29,15 +30,10 @@ public class Database {
     private ResultSet rs = null;
   
     //  Connect.
-    public ArrayList<Student> read(String name, String id) throws ClassNotFoundException, SQLException // Do try catch blocks for this method. Error message in UI class needed.
+    public ArrayList<Student> read(String name, String id) throws ClassNotFoundException, SQLException 
+            // Do try catch blocks for this method. Error message in UI class needed.
     {
-  //    String sql =  ("SELECT StudentID,FullName FROM student_table " +
-             //      "WHERE FullName like  '%" + (name) + "%' " + "OR StudentID like '" + (id) +"'"); // +
-               //  ("OR (StudentID like '"+(id)+"' AND FullName like '%"+ (name) + "%'"); //search by ID only works but name does not work
-               // only use WHERE, LIKE, OR, ORDER
-               
-             //  String sql = ("SELECT StudentID, FullName FROM student_table WHERE FullName IN '%" + (name)+"'" + "OR StudentID IN'"+(id)+"'");     
-             
+       
         // Connect to database. Might be possible to a)Connect when app starts b)Separate it back to what it was before. DONT duplicate code.    
         try {
             // Register JDBC driver
@@ -60,12 +56,10 @@ public class Database {
         if (name.equals(""))
         {
            sql = sql + " StudentID like '"+ (id) + "';"; 
-           // String sql = ("StudentID like '" + (id) + "'");
         } 
         else if (id.equals(""))
         {
            sql = sql + " FullName like '%" + (name) + "%';"; //+ " AND StudentID like'" + (id) + "';";
-            //String sql = ("Select * FROM student_table WHERE FullName like'" + (name) + "'" + "AND StudentID like'" + (id) + "';");
         }
         else
         {
@@ -90,20 +84,14 @@ public class Database {
         return students; 
     }
     
-    //public ArrayList<Student> add(String name, String id) throws SQLException //adds entry to log table
-    
-    
-    // public void writeToLog(String name, String id, String purpose) throws ClassNotFoundException, SQLException // reading ONE ROW only every time the button is pressed)
-    public void writeToLog(String selectedObject) throws ClassNotFoundException, SQLException        
-            // DONT SELECT MORE THAN ONE ITEM
-            // CONSIDER multiple entries
-    {
-        //String sql = ("INSERT INTO studentlog WHERE FullName like'" + (name) + "' AND StudentID like '"+ (id) + " VALUES '" +  (name) +(id));
-       // String sql = ("INSERT INTO studentlog '"+ (name) + "'WHERE FullName like'" + (name) + "' AND StudentID like '" " VALUES '" +  (name)";
-  //   String sql = ("INSERT INTO studentlog '"+(name)+ (id)+"'" +"VALUES '"+(name)+(id)+"'");
-    
+    public void writeToLog(String name, String id, String status) throws ClassNotFoundException, SQLException   
+            // adds entry to studentlog table
+            // reading ONE ROW only every time the button is pressed
+    {    
         // Connect again here.
         
+        String sql = "INSERT INTO studentlog (name,id, timein, timeout, reason) " +
+                     "VALUES ('"+name+"','"+id+"',null,null,'"+status+"');";
         
         try {
             // Register JDBC driver
@@ -112,25 +100,58 @@ public class Database {
             // Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            // send query
+            stmt = conn.createStatement();
+            System.out.println(sql);
+            stmt.executeUpdate(sql);
         }
         catch (ClassNotFoundException e) {
             throw e;
         }  
         catch (SQLException e) {
             throw e;
+        }      
+    }       
+    
+    public ArrayList<Student> getLog() throws ClassNotFoundException, SQLException
+    {
+        String sql = "Select * FROM studentlog;";
+        
+        try {
+            // Register JDBC driver
+            Class.forName("com.mysql.jdbc.Driver");
+
+            // Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+            // send query
+            stmt = conn.createStatement();
+            System.out.println(sql);
+            rs = stmt.executeQuery(sql);
+        }
+        catch (ClassNotFoundException e) {
+            throw e;
+        }  
+        catch (SQLException e) {
+            throw e;
+        }      
+        
+        // Clear the ArrayList
+        students.clear();
+        
+        // Process the result set. 
+        while(rs.next()) {    
+            Student s = new Student(rs.getString("name"), rs.getString("id"));    
+            students.add(s);
         }     
         
-        
-         String sql = "INSERT INTO studentlog (name,id,timein,timeout,reason) VALUES ('"+selectedObject+"',null,null,null,null);";
-       // String sql = ("INSERT INTO studentlog (name,id) VALUES ('" + (name) +"', '" + (id) + "';");
-       
-        stmt = conn.createStatement();
-        System.out.println(sql);
-        rs = stmt.executeQuery(sql);
-        
-    }        
+        // Return ArrayList of Student objects.
+        return students; 
+    }
   
-    public void getSystemTime()
+    public void getSystemTime() // user-friendly string
     {
         Calendar now = Calendar.getInstance(); 
         int year = now.get(Calendar.YEAR);
@@ -142,7 +163,7 @@ public class Database {
         System.out.println(now);
     }
     
-    public void createLogTable() throws SQLException
+    public void exportLog() throws SQLException
     {
         stmt = conn.createStatement();
         String sql = "CREATE TABLE Log(Name String, ID String)";  

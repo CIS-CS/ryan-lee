@@ -12,14 +12,8 @@ import java.util.Collections;
  */
 public class StudentTableModel extends AbstractTableModel {
 
-    private String[] columnNames = {"FullName", "Student ID"};
+    private String[] columnNames = {"name", "id", "timein", "timeout", "reason"};
     private ArrayList<Student> data = new ArrayList<Student>();
-    /*
-    private Object[][] data = {
-        {"Bob", "McAdoo"},
-        {"Magic", "Johnson"}
-    };
-    */
 
     //--------------------------------------------------------------------------
     // These first three methods are abstract (empty) in AbstractDataModel
@@ -50,11 +44,13 @@ public class StudentTableModel extends AbstractTableModel {
         return columnNames[col];
     }
 
+    /*
     @Override
     public Class getColumnClass(int col) {
         //return getValueAt(0, col).getClass();
         return getValueAt(0, col).getClass();
     }
+    */
 
     //--------------------------------------------------------------------------
     /*
